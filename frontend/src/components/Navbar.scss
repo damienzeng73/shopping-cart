@@ -1,0 +1,17 @@
+#navbar {
+    position: fixed;
+    padding: 15px;
+    transition: all 0.4s linear;
+
+    .header {
+        font-size: 2rem;
+    }
+}
+
+.small {
+    padding: 0 !important;
+
+    .header {
+        font-size: 1.5rem !important;
+    }
+}
