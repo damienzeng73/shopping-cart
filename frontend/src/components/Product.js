@@ -17,7 +17,7 @@ class Product extends React.Component {
     }
 
     handleOnChange(e) {
-        this.setState({ count: parseInt(e.target.value) })
+        this.setState({ count: parseInt(e.target.value, 10) })
     }
 
     handleMinusCount(e) {
