@@ -36,7 +36,7 @@ class Navbar extends React.Component {
 
     render() {
         return (
-            <Menu id='navbar' className={this.state.className} size='massive' fixed='top'>
+            <Menu id='navbar' className={this.state.className} size='massive' fixed='top' secondary>
                 <Menu.Item header>
                     Logo
                 </Menu.Item>
