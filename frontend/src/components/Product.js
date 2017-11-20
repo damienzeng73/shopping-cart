@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Modal, Card, Image, Rating, Grid, Header, Divider, Button, Input } from 'semantic-ui-react'
 
 import './Product.css'
@@ -27,7 +28,7 @@ class Product extends React.Component {
     }
 
     handleAddCount(e) {
-        if (this.state.count < 99) {
+        if (this.state.count < this.props.product.quantity) {
             this.setState({ count: this.state.count + 1 })
         }
     }
@@ -39,16 +40,16 @@ class Product extends React.Component {
                     <Image src={img} alt='img' />
                     <Card.Content>
                         <Card.Header>
-                            Product 1
+                            {this.props.product.name}
                         </Card.Header>
 
                         <Card.Meta>
-                            $100
+                            ${this.props.product.price}
                         </Card.Meta>
                     </Card.Content>
 
                     <Card.Content extra>
-                        <Rating icon='star' defaultRating={4} maxRating={5} disabled />
+                        <Rating icon='star' defaultRating={this.props.product.rating} maxRating={5} disabled />
                     </Card.Content>
                 </Card>
             }>
@@ -62,21 +63,22 @@ class Product extends React.Component {
 
                         <Grid.Column width='10'>
                             <Modal.Description>
-                                <Header id='product-name' as='h1'>Product</Header>
-                                <Header id='price' as='h2'>$100</Header>
+                                <Header id='product-name' as='h1'>{this.props.product.name}</Header>
+                                <Header id='price' as='h2'>${this.props.product.price}</Header>
                                 <Header id='rating' sub>
-                                    <Rating icon='star' defaultRating={4} maxRating={5} disabled />
+                                    <Rating icon='star' defaultRating={this.props.product.rating} maxRating={5} disabled />
                                 </Header>
 
                                 <div id='count'>
                                     <Button icon='minus' size='tiny' onClick={this.handleMinusCount} />
                                     <Input value={this.state.count} onChange={this.handleOnChange} />
                                     <Button icon='add' size='tiny' onClick={this.handleAddCount} />
+                                    <span>(In stock: {this.props.product.quantity})</span>
                                 </div>
 
                                 <Divider />
 
-                                <p>Test</p>
+                                <p>{this.props.product.description}</p>
                             </Modal.Description>
                         </Grid.Column>
                     </Grid>
@@ -88,6 +90,10 @@ class Product extends React.Component {
             </Modal>
         )
     }
+}
+
+Product.propTypes = {
+    product: PropTypes.object.isRequired
 }
 
 
