@@ -15,6 +15,7 @@ class Product extends React.Component {
         this.handleOnChange = this.handleOnChange.bind(this)
         this.handleMinusCount = this.handleMinusCount.bind(this)
         this.handleAddCount = this.handleAddCount.bind(this)
+        this.handleModalOnClose = this.handleModalOnClose.bind(this)
     }
 
     handleOnChange(e) {
@@ -33,26 +34,31 @@ class Product extends React.Component {
         }
     }
 
+    handleModalOnClose(e) {
+        this.setState({ count: 1 })
+    }
+
     render() {
+        const modalTrigger =
+            <Card link>
+                <Image src={img} alt='img' />
+                <Card.Content>
+                    <Card.Header>
+                        {this.props.product.name}
+                    </Card.Header>
+
+                    <Card.Meta>
+                        ${this.props.product.price}
+                    </Card.Meta>
+                </Card.Content>
+
+                <Card.Content extra>
+                    <Rating icon='star' defaultRating={this.props.product.rating} maxRating={5} disabled />
+                </Card.Content>
+            </Card>
+
         return (
-            <Modal trigger={
-                <Card link>
-                    <Image src={img} alt='img' />
-                    <Card.Content>
-                        <Card.Header>
-                            {this.props.product.name}
-                        </Card.Header>
-
-                        <Card.Meta>
-                            ${this.props.product.price}
-                        </Card.Meta>
-                    </Card.Content>
-
-                    <Card.Content extra>
-                        <Rating icon='star' defaultRating={this.props.product.rating} maxRating={5} disabled />
-                    </Card.Content>
-                </Card>
-            }>
+            <Modal trigger={modalTrigger} onClose={this.handleModalOnClose}>
                 <Modal.Header>Product details</Modal.Header>
 
                 <Modal.Content image>
