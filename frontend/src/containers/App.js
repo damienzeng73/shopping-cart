@@ -1,24 +1,16 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Container } from 'semantic-ui-react'
-import axios from 'axios'
 
 import './App.css'
 import Navbar from '../components/Navbar'
 import ProductList from '../components/ProductList'
+import { fetchProducts } from '../actions/Products'
 
 class App extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            products: []
-        }
-    }
-
     componentDidMount() {
-        axios.get('/api/products')
-            .then((res) => {
-                this.setState({ products: res.data })
-            })
+        this.props.fetchProducts()
     }
 
     render() {
@@ -29,12 +21,23 @@ class App extends React.Component {
                 </Container>
 
                 <Container id='content-wrapper'>
-                    <ProductList products={this.state.products} />
+                    <ProductList products={this.props.products} />
                 </Container>
             </div>
         )
     }
 }
 
+App.propTypes = {
+    products: PropTypes.array.isRequired,
+    fetchProducts: PropTypes.func.isRequired
+}
 
-export default App
+const mapStateToProps = (state) => {
+    return {
+        products: state.products.data
+    }
+}
+
+
+export default connect(mapStateToProps, { fetchProducts })(App)

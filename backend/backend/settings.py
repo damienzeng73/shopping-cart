@@ -80,7 +80,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'shopping_cart',
-        'USER': 'YOUR_USER_NAME',
+        'USER': 'YOUR_USERNAME',
         'PASSWORD': 'YOUR_PASSWORD',
         'HOST': 'localhost',
         'PORT': ''
