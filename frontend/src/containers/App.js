@@ -29,7 +29,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-    products: PropTypes.array.isRequired,
+    products: PropTypes.array,
     fetchProducts: PropTypes.func.isRequired
 }
 

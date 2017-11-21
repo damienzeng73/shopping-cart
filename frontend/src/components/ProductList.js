@@ -20,7 +20,7 @@ const ProductList = (props) => {
 }
 
 ProductList.propTypes = {
-    products: PropTypes.array.isRequired
+    products: PropTypes.array
 }
 
 
