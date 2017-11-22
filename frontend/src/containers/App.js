@@ -18,7 +18,7 @@ class App extends React.Component {
         return (
             <div>
                 <Container fluid>
-                    <Navbar />
+                    <Navbar itemsInCartCount={this.props.itemsInCartCount} />
                 </Container>
 
                 <Container id='content-wrapper'>
@@ -30,6 +30,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
+    itemsInCartCount: PropTypes.number.isRequired,
     products: PropTypes.array,
     fetchProducts: PropTypes.func.isRequired,
     addToCart: PropTypes.func.isRequired
@@ -37,7 +38,8 @@ App.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        products: state.products.data
+        products: state.products.data,
+        itemsInCartCount: state.cart.length
     }
 }
 

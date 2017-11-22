@@ -1,5 +1,6 @@
 import React from 'react'
-import { Menu, Input, Icon } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
+import { Menu, Input, Icon, Label } from 'semantic-ui-react'
 
 import './Navbar.css'
 
@@ -48,6 +49,7 @@ class Navbar extends React.Component {
 
                     <Menu.Item onClick={this.handleItemOnClick}>
                         <Icon name='shop' />
+                        <Label color='red' floating>{this.props.itemsInCartCount}</Label>
                     </Menu.Item>
 
                     <Menu.Item onClick={this.handleItemOnClick}>
@@ -57,6 +59,10 @@ class Navbar extends React.Component {
             </Menu>
         )
     }
+}
+
+Navbar.propTypes = {
+    itemsInCartCount: PropTypes.number.isRequired
 }
 
 
