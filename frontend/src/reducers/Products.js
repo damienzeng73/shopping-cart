@@ -1,6 +1,6 @@
 import { FETCH_PRODUCTS_REQUEST, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_FAILURE } from '../constants/ActionTypes'
 
-const products = (state=[], action={}) => {
+const products = (state={}, action={}) => {
     switch(action.type) {
         case FETCH_PRODUCTS_REQUEST:
             return {

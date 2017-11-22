@@ -8,38 +8,51 @@ class Product extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            count: 1
+            quantity: 1,
+            modalOpen: false
         }
 
+        this.handleOnClick = this.handleOnClick.bind(this)
         this.handleOnChange = this.handleOnChange.bind(this)
         this.handleMinusCount = this.handleMinusCount.bind(this)
         this.handleAddCount = this.handleAddCount.bind(this)
+        this.handleModalOpen = this.handleModalOpen.bind(this)
         this.handleModalOnClose = this.handleModalOnClose.bind(this)
     }
 
+    handleOnClick(e, product, quantity) {
+        e.stopPropagation()
+        this.props.addToCart(product, quantity)
+        this.handleModalOnClose()
+    }
+
     handleOnChange(e) {
-        this.setState({ count: parseInt(e.target.value, 10) })
+        this.setState({ quantity: parseInt(e.target.value, 10) })
     }
 
-    handleMinusCount(e) {
-        if (this.state.count > 1) {
-            this.setState({ count: this.state.count - 1 })
+    handleMinusCount() {
+        if (this.state.quantity > 1) {
+            this.setState({ quantity: this.state.quantity - 1 })
         }
     }
 
-    handleAddCount(e) {
-        if (this.state.count < this.props.product.quantity) {
-            this.setState({ count: this.state.count + 1 })
+    handleAddCount() {
+        if (this.state.quantity < this.props.product.quantity) {
+            this.setState({ quantity: this.state.quantity + 1 })
         }
     }
 
-    handleModalOnClose(e) {
-        this.setState({ count: 1 })
+    handleModalOpen() {
+        this.setState({ modalOpen: true })
+    }
+
+    handleModalOnClose() {
+        this.setState({ quantity: 1, modalOpen: false })
     }
 
     render() {
         const modalTrigger =
-            <Card link>
+            <Card link onClick={this.handleModalOpen}>
                 <Image src={this.props.product.image_url} alt='img' centered rounded />
                 <Card.Content>
                     <Card.Header>
@@ -57,7 +70,7 @@ class Product extends React.Component {
             </Card>
 
         return (
-            <Modal trigger={modalTrigger} onClose={this.handleModalOnClose}>
+            <Modal trigger={modalTrigger} size='large' open={this.state.modalOpen} onClose={this.handleModalOnClose} closeIcon>
                 <Modal.Header>Product details</Modal.Header>
 
                 <Modal.Content image>
@@ -74,9 +87,9 @@ class Product extends React.Component {
                                     <Rating icon='star' defaultRating={this.props.product.rating} maxRating={5} disabled />
                                 </Header>
 
-                                <div id='count'>
+                                <div id='quantity'>
                                     <Button icon='minus' size='tiny' onClick={this.handleMinusCount} />
-                                    <Input value={this.state.count} onChange={this.handleOnChange} />
+                                    <Input value={this.state.quantity} onChange={this.handleOnChange} />
                                     <Button icon='add' size='tiny' onClick={this.handleAddCount} />
                                     <span>(In stock: {this.props.product.quantity})</span>
                                 </div>
@@ -90,7 +103,7 @@ class Product extends React.Component {
                 </Modal.Content>
 
                 <Modal.Actions>
-                    <Button primary content='Add to cart' icon='shop' labelPosition='right' />
+                    <Button primary content='Add to cart' icon='shop' labelPosition='right' onClick={(e) => this.handleOnClick(e, this.props.product, this.state.quantity)} />
                 </Modal.Actions>
             </Modal>
         )
@@ -98,7 +111,8 @@ class Product extends React.Component {
 }
 
 Product.propTypes = {
-    product: PropTypes.object.isRequired
+    product: PropTypes.object.isRequired,
+    addToCart: PropTypes.func.isRequired
 }
 
 

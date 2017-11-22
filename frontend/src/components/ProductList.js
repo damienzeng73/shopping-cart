@@ -8,7 +8,7 @@ import Product from './Product'
 const ProductList = (props) => {
     let productsCollection = _.map(props.products, (product, idx) => {
         return (
-            <Product key={idx} product={product} />
+            <Product key={idx} product={product} addToCart={props.addToCart} />
         )
     })
 
@@ -20,7 +20,8 @@ const ProductList = (props) => {
 }
 
 ProductList.propTypes = {
-    products: PropTypes.array
+    products: PropTypes.array,
+    addToCart: PropTypes.func.isRequired
 }
 
 

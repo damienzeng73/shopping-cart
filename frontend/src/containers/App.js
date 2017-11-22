@@ -7,6 +7,7 @@ import './App.css'
 import Navbar from '../components/Navbar'
 import ProductList from '../components/ProductList'
 import { fetchProducts } from '../actions/Products'
+import { addToCart } from '../actions/Cart'
 
 class App extends React.Component {
     componentDidMount() {
@@ -21,7 +22,7 @@ class App extends React.Component {
                 </Container>
 
                 <Container id='content-wrapper'>
-                    <ProductList products={this.props.products} />
+                    <ProductList products={this.props.products} addToCart={this.props.addToCart} />
                 </Container>
             </div>
         )
@@ -30,7 +31,8 @@ class App extends React.Component {
 
 App.propTypes = {
     products: PropTypes.array,
-    fetchProducts: PropTypes.func.isRequired
+    fetchProducts: PropTypes.func.isRequired,
+    addToCart: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
@@ -40,4 +42,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { fetchProducts })(App)
+export default connect(mapStateToProps, { fetchProducts, addToCart })(App)
