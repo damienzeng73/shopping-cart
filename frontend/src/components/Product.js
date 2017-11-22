@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Modal, Card, Image, Rating, Grid, Header, Divider, Button, Input } from 'semantic-ui-react'
 
 import './Product.css'
-import img from '../img/item.png'
 
 class Product extends React.Component {
     constructor(props) {
@@ -41,7 +40,7 @@ class Product extends React.Component {
     render() {
         const modalTrigger =
             <Card link>
-                <Image src={img} alt='img' />
+                <Image src={this.props.product.image_url} alt='img' centered rounded />
                 <Card.Content>
                     <Card.Header>
                         {this.props.product.name}
@@ -64,7 +63,7 @@ class Product extends React.Component {
                 <Modal.Content image>
                     <Grid>
                         <Grid.Column width='6'>
-                            <Image src={img} alt='img' wrapped />
+                            <Image src={this.props.product.image_url} alt='img' wrapped />
                         </Grid.Column>
 
                         <Grid.Column width='10'>

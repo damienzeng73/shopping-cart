@@ -8,6 +8,7 @@ class Products(models.Model):
     quantity = models.PositiveIntegerField()
     rating = models.PositiveSmallIntegerField(default=0)
     description = models.TextField(default='Product description.')
+    image_url = models.TextField(default='')
 
     class Meta:
         db_table = 'products'
