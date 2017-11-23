@@ -2,18 +2,23 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Container } from 'semantic-ui-react'
+import { Switch, Route, withRouter } from 'react-router-dom'
 
 import './App.css'
 import Navbar from '../components/Navbar'
-import ProductList from '../components/ProductList'
-import { fetchProducts } from '../actions/Products'
-import { addToCart } from '../actions/Cart'
+import ShoppingPage from './ShoppingPage'
+
+const Main = () => {
+    return (
+        <main>
+            <Switch>
+                <Route exact path='/' component={ShoppingPage} />
+            </Switch>
+        </main>
+    )
+}
 
 class App extends React.Component {
-    componentDidMount() {
-        this.props.fetchProducts()
-    }
-
     render() {
         return (
             <div>
@@ -22,7 +27,7 @@ class App extends React.Component {
                 </Container>
 
                 <Container id='content-wrapper'>
-                    <ProductList products={this.props.products} addToCart={this.props.addToCart} />
+                    <Main />
                 </Container>
             </div>
         )
@@ -30,18 +35,14 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-    itemsInCartCount: PropTypes.number.isRequired,
-    products: PropTypes.array,
-    fetchProducts: PropTypes.func.isRequired,
-    addToCart: PropTypes.func.isRequired
+    itemsInCartCount: PropTypes.number.isRequired
 }
 
 const mapStateToProps = (state) => {
     return {
-        products: state.products.data,
         itemsInCartCount: state.cart.length
     }
 }
 
 
-export default connect(mapStateToProps, { fetchProducts, addToCart })(App)
+export default withRouter(connect(mapStateToProps, {})(App))

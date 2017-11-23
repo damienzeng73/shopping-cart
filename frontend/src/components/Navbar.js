@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Menu, Input, Icon, Label } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 import './Navbar.css'
 
@@ -52,7 +53,7 @@ class Navbar extends React.Component {
                         <Label color='red' floating>{this.props.itemsInCartCount}</Label>
                     </Menu.Item>
 
-                    <Menu.Item onClick={this.handleItemOnClick}>
+                    <Menu.Item as={Link} name='test' to='/test' onClick={this.handleItemOnClick}>
                         <Icon name='user' />
                     </Menu.Item>
                 </Menu.Menu>
