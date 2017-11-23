@@ -39,7 +39,7 @@ class Navbar extends React.Component {
     render() {
         return (
             <Menu id='navbar' className={this.state.className} size='massive' fixed='top' secondary>
-                <Menu.Item header>
+                <Menu.Item id='logo' as={Link} to='/' header>
                     Logo
                 </Menu.Item>
 
@@ -48,12 +48,12 @@ class Navbar extends React.Component {
                         <Input transparent icon={{ name: 'search', link: true }} placeholder='Search...' />
                     </Menu.Item>
 
-                    <Menu.Item onClick={this.handleItemOnClick}>
+                    <Menu.Item as={Link} to='/cart' onClick={this.handleItemOnClick}>
                         <Icon name='shop' />
                         <Label color='red' floating>{this.props.itemsInCartCount}</Label>
                     </Menu.Item>
 
-                    <Menu.Item as={Link} name='test' to='/test' onClick={this.handleItemOnClick}>
+                    <Menu.Item as={Link} to='/account' onClick={this.handleItemOnClick}>
                         <Icon name='user' />
                     </Menu.Item>
                 </Menu.Menu>
