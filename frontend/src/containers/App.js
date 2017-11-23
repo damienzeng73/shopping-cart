@@ -7,12 +7,14 @@ import { Switch, Route, withRouter } from 'react-router-dom'
 import './App.css'
 import Navbar from '../components/Navbar'
 import ShoppingPage from './ShoppingPage'
+import CartPage from './CartPage'
 
 const Main = () => {
     return (
         <main>
             <Switch>
                 <Route exact path='/' component={ShoppingPage} />
+                <Route path='/cart' component={CartPage} />
             </Switch>
         </main>
     )
