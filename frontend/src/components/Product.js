@@ -103,7 +103,7 @@ class Product extends React.Component {
                 </Modal.Content>
 
                 <Modal.Actions>
-                    <Button primary content='Add to cart' icon='shop' labelPosition='right' onClick={(e) => this.handleOnClick(e, this.props.product, this.state.quantity)} />
+                    <Button primary content='Add to cart' icon='add to cart' labelPosition='right' onClick={(e) => this.handleOnClick(e, this.props.product, this.state.quantity)} />
                 </Modal.Actions>
             </Modal>
         )
