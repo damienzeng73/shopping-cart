@@ -51,14 +51,14 @@ class CartPage extends React.Component {
         return (
             <div>
                 <Step.Group attached='top'>
-                    <Step active>
+                    <Step active={this.state.step === 1}>
                         <Icon name='shopping cart' />
                         <Step.Content>
                             <Step.Title>Confirm order</Step.Title>
                         </Step.Content>
                     </Step>
 
-                    <Step>
+                    <Step active={this.state.step === 2}>
                         <Icon name='truck' />
                         <Step.Content>
                             <Step.Title>Shipping</Step.Title>
@@ -66,7 +66,7 @@ class CartPage extends React.Component {
                         </Step.Content>
                     </Step>
 
-                    <Step>
+                    <Step active={this.state.step === 3}>
                         <Icon name='payment' />
                         <Step.Content>
                             <Step.Title>Billing</Step.Title>
