@@ -1,4 +1,4 @@
-import { ADD_TO_CART } from '../constants/ActionTypes'
+import { ADD_TO_CART, REMOVE_FROM_CART } from '../constants/ActionTypes'
 import shortid from 'shortid'
 import _ from 'lodash'
 
@@ -24,6 +24,17 @@ const cart = (state=[], action={}) => {
                     quantity: action.payload.quantity
                 }
             ]
+
+        case REMOVE_FROM_CART:
+            let idx = _.findIndex(state, { id: action.payload.id })
+            if (idx >= 0) {
+                return [
+                    ...state.slice(0, idx),
+                    ...state.slice(idx + 1)
+                ]
+            }
+
+            return state
 
         default:
             return state
