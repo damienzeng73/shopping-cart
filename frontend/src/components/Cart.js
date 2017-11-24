@@ -1,10 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Button, Message } from 'semantic-ui-react'
+import { Table, Button, Message, Divider } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 import _ from 'lodash'
 
 const Cart = (props) => {
+    let totalPrice = 0
     let items = _.map(props.cart, (element, index) => {
+        totalPrice += element.product.price * element.quantity
         return (
             <Table.Row key={index}>
                 <Table.Cell>{index+1}</Table.Cell>
@@ -49,6 +52,20 @@ const Cart = (props) => {
     return (
         <div>
             {items.length > 0 ? itemList : cartEmptyMessage}
+
+            <Divider />
+
+            <Button
+                content='Total'
+                icon='dollar'
+                label={{ basic: true, pointing: 'left', content: totalPrice }}
+            />
+
+            <Button.Group floated='right'>
+                <Button primary as={Link} to='/'>Continue shopping</Button>
+                <Button.Or />
+                <Button color='red' disabled={items.length <= 0} onClick={(e) => props.nextStep()}>Next step</Button>
+            </Button.Group>
         </div>
     )
 }
