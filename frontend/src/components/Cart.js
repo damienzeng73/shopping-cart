@@ -58,7 +58,7 @@ const Cart = (props) => {
             <Button
                 content='Total'
                 icon='dollar'
-                label={{ basic: true, pointing: 'left', content: totalPrice }}
+                label={{ basic: true, pointing: 'left', content: totalPrice.toFixed(2) }}
             />
 
             <Button.Group floated='right'>
