@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Button } from 'semantic-ui-react'
+import { Table, Button, Message } from 'semantic-ui-react'
 import _ from 'lodash'
 
 const Cart = (props) => {
@@ -19,8 +19,8 @@ const Cart = (props) => {
         )
     })
 
-    return (
-        <Table striped padded>
+    const itemList =
+        <Table striped padded attached>
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell>SN</Table.HeaderCell>
@@ -36,6 +36,20 @@ const Cart = (props) => {
                 {items}
             </Table.Body>
         </Table>
+
+    const cartEmptyMessage =
+        <Message info>
+            <Message.Header>
+                Your shopping-cart is empty.
+            </Message.Header>
+
+            <p>There is no item in your shopping-cart, go add some item now.</p>
+        </Message>
+
+    return (
+        <div>
+            {items.length > 0 ? itemList : cartEmptyMessage}
+        </div>
     )
 }
 
