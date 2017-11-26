@@ -5,7 +5,9 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import Cart from '../components/Cart'
+import Shipping from '../components/Shipping'
 import { removeFromCart } from '../actions/Cart'
+import { setShippingOptions } from '../actions/Shipping'
 
 class CartPage extends React.Component {
     constructor(props) {
@@ -35,6 +37,13 @@ class CartPage extends React.Component {
                             cart={this.props.cart}
                             nextStep={this.nextStep}
                             handleRemoveItem={this.handleRemoveItem}
+                        />
+
+            case 2:
+                return <Shipping
+                            nextStep={this.nextStep}
+                            previousStep={this.previousStep}
+                            setShippingOptions={this.props.setShippingOptions}
                         />
 
             default:
@@ -83,7 +92,8 @@ class CartPage extends React.Component {
 
 CartPage.propTypes = {
     cart: PropTypes.array.isRequired,
-    removeFromCart: PropTypes.func.isRequired
+    removeFromCart: PropTypes.func.isRequired,
+    setShippingOptions: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
@@ -93,4 +103,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default withRouter(connect(mapStateToProps, { removeFromCart })(CartPage))
+export default withRouter(connect(mapStateToProps, { removeFromCart, setShippingOptions })(CartPage))
