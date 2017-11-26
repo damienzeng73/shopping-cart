@@ -3,7 +3,7 @@ import shortid from 'shortid'
 import _ from 'lodash'
 
 const cart = (state=[], action={}) => {
-    switch(action.type) {
+    switch (action.type) {
         case ADD_TO_CART:
             if (_.filter(state, (obj) => obj.product.name === action.payload.product.name).length > 0) {
                 let newState = state.slice()
