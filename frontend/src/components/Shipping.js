@@ -20,6 +20,19 @@ class Shipping extends React.Component {
         this.handleSelectOnChange = this.handleSelectOnChange.bind(this)
     }
 
+    componentWillMount() {
+        if ('data' in this.props.shipping) {
+            this.setState({
+                deliveryMethod: this.props.shipping.data.deliveryMethod,
+                firstName: this.props.shipping.data.firstName,
+                lastName: this.props.shipping.data.lastName,
+                phoneNumber: this.props.shipping.data.phoneNumber,
+                country: this.props.shipping.data.country,
+                address: this.props.shipping.data.address
+            })
+        }
+    }
+
     nextStep() {
         this.props.setShippingOptions(this.state)
         this.props.nextStep()
@@ -45,7 +58,7 @@ class Shipping extends React.Component {
             {key: 'uk', value: 'uk', flag: 'gb', text: 'United Kingdom'},
             {key: 'usa', value: 'usa', flag: 'us', text: 'United States'}
         ]
-        
+
         return (
             <div>
                 <Segment attached>
@@ -105,11 +118,11 @@ class Shipping extends React.Component {
                             />
 
                             <Form.Select
-                                value={countryOptions[this.state.country]}
                                 label='Country'
                                 placeholder='Country'
                                 options={countryOptions}
                                 onChange={this.handleSelectOnChange}
+                                defaultValue={this.state.country}
                             />
 
                             <Form.Input
@@ -140,6 +153,7 @@ class Shipping extends React.Component {
 }
 
 Shipping.propTypes = {
+    shipping: PropTypes.object.isRequired,
     previousStep: PropTypes.func.isRequired,
     nextStep: PropTypes.func.isRequired
 }
