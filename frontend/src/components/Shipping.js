@@ -128,7 +128,11 @@ class Shipping extends React.Component {
                 <Button.Group floated='right'>
                     <Button primary onClick={(e) => this.props.previousStep()}>Previous step</Button>
                     <Button.Or />
-                    <Button color='red' onClick={this.nextStep}>Next step</Button>
+                    <Button
+                        color='red'
+                        onClick={this.nextStep}
+                        disabled={this.state.firstName === '' || this.state.lastName === '' || this.state.phoneNumber === '' || this.state.country === '' || this.state.address === ''}>Next step
+                    </Button>
                 </Button.Group>
             </div>
         )
