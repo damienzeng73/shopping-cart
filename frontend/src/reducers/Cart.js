@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from '../constants/ActionTypes'
+import { ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART } from '../constants/ActionTypes'
 import shortid from 'shortid'
 import _ from 'lodash'
 
@@ -35,6 +35,9 @@ const cart = (state=[], action={}) => {
             }
 
             return state
+
+        case CLEAR_CART:
+            return []
 
         default:
             return state
