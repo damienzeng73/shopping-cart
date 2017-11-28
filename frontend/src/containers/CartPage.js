@@ -6,8 +6,11 @@ import { withRouter } from 'react-router-dom'
 
 import Cart from '../components/Cart'
 import Shipping from '../components/Shipping'
+import Billing from '../components/Billing'
+import Confirmation from '../components/Confirmation'
 import { removeFromCart } from '../actions/Cart'
 import { setShippingOptions } from '../actions/Shipping'
+import { setBillingOptions } from '../actions/Billing'
 
 class CartPage extends React.Component {
     constructor(props) {
@@ -18,6 +21,7 @@ class CartPage extends React.Component {
 
         this.nextStep = this.nextStep.bind(this)
         this.previousStep = this.previousStep.bind(this)
+        this.submit = this.submit.bind(this)
         this.showStep = this.showStep.bind(this)
         this.handleRemoveItem = this.handleRemoveItem.bind(this)
     }
@@ -28,6 +32,11 @@ class CartPage extends React.Component {
 
     previousStep() {
         this.setState({ step: this.state.step - 1 })
+    }
+
+    submit() {
+        console.log(this.props.cart)
+        console.log(this.props.shipping)
     }
 
     showStep() {
@@ -41,9 +50,24 @@ class CartPage extends React.Component {
 
             case 2:
                 return <Shipping
+                            shipping={this.props.shipping}
                             nextStep={this.nextStep}
                             previousStep={this.previousStep}
                             setShippingOptions={this.props.setShippingOptions}
+                        />
+
+            case 3:
+                return <Billing
+                            billing={this.props.billing}
+                            nextStep={this.nextStep}
+                            previousStep={this.previousStep}
+                            setBillingOptions={this.props.setBillingOptions}
+                        />
+
+            case 4:
+                return <Confirmation
+                            previousStep={this.previousStep}
+                            submit={this.submit}
                         />
 
             default:
@@ -63,7 +87,7 @@ class CartPage extends React.Component {
                     <Step active={this.state.step === 1}>
                         <Icon name='shopping cart' />
                         <Step.Content>
-                            <Step.Title>Confirm order</Step.Title>
+                            <Step.Title>Confirm items</Step.Title>
                         </Step.Content>
                     </Step>
 
@@ -82,6 +106,14 @@ class CartPage extends React.Component {
                             <Step.Description>Enter billing information</Step.Description>
                         </Step.Content>
                     </Step>
+
+                    <Step active={this.state.step === 4}>
+                        <Icon name='info circle' />
+                        <Step.Content>
+                            <Step.Title>Confirm Order</Step.Title>
+                            <Step.Description>Verify order details</Step.Description>
+                        </Step.Content>
+                    </Step>
                 </Step.Group>
 
                 {this.showStep()}
@@ -92,15 +124,19 @@ class CartPage extends React.Component {
 
 CartPage.propTypes = {
     cart: PropTypes.array.isRequired,
+    shipping: PropTypes.object.isRequired,
     removeFromCart: PropTypes.func.isRequired,
-    setShippingOptions: PropTypes.func.isRequired
+    setShippingOptions: PropTypes.func.isRequired,
+    setBillingOptions: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
     return {
-        cart: state.cart
+        cart: state.cart,
+        shipping: state.shipping,
+        billing: state.billing
     }
 }
 
 
-export default withRouter(connect(mapStateToProps, { removeFromCart, setShippingOptions })(CartPage))
+export default withRouter(connect(mapStateToProps, { removeFromCart, setShippingOptions, setBillingOptions })(CartPage))
