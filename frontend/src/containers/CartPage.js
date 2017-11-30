@@ -35,8 +35,6 @@ class CartPage extends React.Component {
     }
 
     submit() {
-        console.log('Place order')
-        this.props.clearCart()
     }
 
     showStep() {
@@ -46,6 +44,7 @@ class CartPage extends React.Component {
                             cart={this.props.cart}
                             nextStep={this.nextStep}
                             handleRemoveItem={this.handleRemoveItem}
+                            clearCart={this.props.clearCart}
                         />
 
             case 2:

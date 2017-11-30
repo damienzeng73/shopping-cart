@@ -16,7 +16,7 @@ const Cart = (props) => {
                 <Table.Cell>{element.product.price}</Table.Cell>
                 <Table.Cell>{(element.product.price * element.quantity).toFixed(2)}</Table.Cell>
                 <Table.Cell>
-                    <Button circular icon='trash' onClick={(e) => props.handleRemoveItem(e, element)}/>
+                    <Button circular icon='trash' onClick={(e) => props.handleRemoveItem(e, element)} />
                 </Table.Cell>
             </Table.Row>
         )
@@ -38,6 +38,14 @@ const Cart = (props) => {
             <Table.Body>
                 {items}
             </Table.Body>
+
+            <Table.Footer>
+                <Table.Row>
+                    <Table.HeaderCell colSpan='6'>
+                        <Button floated='right' onClick={(e) => props.clearCart()}>Clear all</Button>
+                    </Table.HeaderCell>
+                </Table.Row>
+            </Table.Footer>
         </Table>
 
     const cartEmptyMessage =
