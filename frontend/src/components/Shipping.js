@@ -56,7 +56,7 @@ class Shipping extends React.Component {
             {key: 'south korea', value: 'south korea', flag: 'kr', text: 'South Korea'},
             {key: 'taiwan', value: 'taiwan', flag: 'tw', text: 'Taiwan'},
             {key: 'uk', value: 'uk', flag: 'gb', text: 'United Kingdom'},
-            {key: 'usa', value: 'usa', flag: 'us', text: 'United States'}
+            {key: 'us', value: 'us', flag: 'us', text: 'United States'}
         ]
 
         return (
@@ -91,7 +91,7 @@ class Shipping extends React.Component {
                             />
                         </Segment>
 
-                        <Header as='h3' attached='top'>Details of recipients</Header>
+                        <Header as='h3' attached='top'>Details of recipient</Header>
                         <Segment attached>
                             <Form.Input
                                 name='firstName'
