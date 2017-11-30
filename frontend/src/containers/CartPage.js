@@ -8,7 +8,7 @@ import Cart from '../components/Cart'
 import Shipping from '../components/Shipping'
 import Billing from '../components/Billing'
 import Confirmation from '../components/Confirmation'
-import { removeFromCart, clearCart } from '../actions/Cart'
+import { removeFromCart, clearCart, placeOrder } from '../actions/Cart'
 import { setShippingOptions } from '../actions/Shipping'
 import { setBillingOptions } from '../actions/Billing'
 
@@ -35,6 +35,7 @@ class CartPage extends React.Component {
     }
 
     submit() {
+        this.props.placeOrder(this.props.cart, this.props.shipping.data, this.props.billing.data)
     }
 
     showStep() {
@@ -130,7 +131,8 @@ CartPage.propTypes = {
     removeFromCart: PropTypes.func.isRequired,
     setShippingOptions: PropTypes.func.isRequired,
     setBillingOptions: PropTypes.func.isRequired,
-    clearCart: PropTypes.func.isRequired
+    clearCart: PropTypes.func.isRequired,
+    placeOrder: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
@@ -142,4 +144,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default withRouter(connect(mapStateToProps, { removeFromCart, setShippingOptions, setBillingOptions, clearCart })(CartPage))
+export default withRouter(connect(mapStateToProps, { removeFromCart, setShippingOptions, setBillingOptions, clearCart, placeOrder })(CartPage))
