@@ -66,6 +66,9 @@ class CartPage extends React.Component {
 
             case 4:
                 return <Confirmation
+                            cart={this.props.cart}
+                            shipping={this.props.shipping}
+                            billing={this.props.billing}
                             previousStep={this.previousStep}
                             submit={this.submit}
                         />
