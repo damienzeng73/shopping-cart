@@ -55,14 +55,44 @@ class Confirmation extends React.Component {
                         <Radio label={this.props.shipping.data.deliveryMethod.charAt(0).toUpperCase() + this.props.shipping.data.deliveryMethod.slice(1)} checked />
 
                         <Header as='h4'>Details of recipient</Header>
-                        <Input label='First Name' value={this.props.shipping.data.firstName} />
-                        <Input label='Last Name' value={this.props.shipping.data.lastName} />
+                        <Input
+                            label={{tag: true, content: 'First Name'}}
+                            labelPosition='right'
+                            value={this.props.shipping.data.firstName}
+                            fluid={true}
+                        />
+
                         <Divider hidden />
-                        <Input label='Phone Number' value={this.props.shipping.data.phoneNumber} />
+                        <Input
+                            label={{tag: true, content: 'Last Name'}}
+                            labelPosition='right'
+                            value={this.props.shipping.data.lastName}
+                            fluid={true}
+                        />
+
                         <Divider hidden />
-                        <Input label='Country' value={this.props.shipping.data.country.toUpperCase()} />
+                        <Input
+                            label={{tag: true, content: 'Phone Number'}}
+                            labelPosition='right'
+                            value={this.props.shipping.data.phoneNumber}
+                            fluid={true}
+                        />
+
                         <Divider hidden />
-                        <Input label='Address' value={this.props.shipping.data.address} />
+                        <Input
+                            label={{tag: true, content: 'Country'}}
+                            labelPosition='right'
+                            value={this.props.shipping.data.country.toUpperCase()}
+                            fluid={true}
+                        />
+
+                        <Divider hidden />
+                        <Input
+                            label={{tag: true, content: 'Address'}}
+                            labelPosition='right'
+                            value={this.props.shipping.data.address}
+                            fluid={true}
+                        />
                     </Segment>
 
                     <Header as='h3' attached='top'>Billing</Header>
