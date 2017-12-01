@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Segment, Form, Button, Divider, Header } from 'semantic-ui-react'
+import { Segment, Form, Button, Divider, Header, Checkbox } from 'semantic-ui-react'
 
 class Shipping extends React.Component {
     constructor(props) {
@@ -11,13 +11,15 @@ class Shipping extends React.Component {
             lastName: '',
             phoneNumber: '',
             country: '',
-            address: ''
+            address: '',
+            rememberDetails: true
         }
 
         this.nextStep = this.nextStep.bind(this)
         this.handleOnChange = this.handleOnChange.bind(this)
         this.handleRadioOnChange = this.handleRadioOnChange.bind(this)
         this.handleSelectOnChange = this.handleSelectOnChange.bind(this)
+        this.handleCheckboxOnChange = this.handleCheckboxOnChange.bind(this)
     }
 
     componentWillMount() {
@@ -48,6 +50,10 @@ class Shipping extends React.Component {
 
     handleSelectOnChange(e, obj) {
         this.setState({ country: obj.value })
+    }
+
+    handleCheckboxOnChange(e, obj) {
+        this.setState({ rememberDetails: !this.state.rememberDetails })
     }
 
     render() {
@@ -121,8 +127,8 @@ class Shipping extends React.Component {
                                 label='Country'
                                 placeholder='Country'
                                 options={countryOptions}
-                                onChange={this.handleSelectOnChange}
                                 defaultValue={this.state.country}
+                                onChange={this.handleSelectOnChange}
                             />
 
                             <Form.Input
@@ -131,6 +137,12 @@ class Shipping extends React.Component {
                                 label='Address'
                                 placeholder='Address'
                                 onChange={this.handleOnChange}
+                            />
+
+                            <Checkbox
+                                label='Remember my details'
+                                defaultChecked={true}
+                                onChange={this.handleCheckboxOnChange}
                             />
                         </Segment>
                     </Form>

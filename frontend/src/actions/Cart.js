@@ -2,6 +2,8 @@ import _ from 'lodash'
 import axios from 'axios'
 
 import { ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART } from '../constants/ActionTypes'
+import { clearShippingOptions } from './Shipping'
+import { clearBillingOptions } from './Billing'
 
 export const addToCart = (product, quantity) => {
     return {
@@ -28,9 +30,14 @@ export const clearCart = () => {
     }
 }
 
-export const placeOrder = (items, shippingMethod, billingMethod) => {
+export const placeOrder = (items, shippingData, billingData) => {
     return dispatch => {
         dispatch(clearCart())
+        if (shippingData.rememberDetails !== true) {
+            dispatch(clearShippingOptions())
+        }
+        dispatch(clearBillingOptions())
+
         _.forEach(items, (element) => {
             let updatedQuantity = element.product.quantity - element.quantity
             axios.put(`/api/products/${element.product.id}/`, {category: element.product.category, name: element.product.name, price: element.product.price, quantity: updatedQuantity})
