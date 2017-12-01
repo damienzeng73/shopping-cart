@@ -45,7 +45,7 @@ class Navbar extends React.Component {
 
                 <Menu.Menu position='right'>
                     <Menu.Item>
-                        <Input transparent icon={{ name: 'search', link: true }} placeholder='Search...' />
+                        <Input transparent icon={{ name: 'search', link: true }} placeholder='Search...' style={this.props.showSearch ? null : {display: 'none'}}/>
                     </Menu.Item>
 
                     <Menu.Item as={Link} to='/cart' onClick={this.handleItemOnClick}>
@@ -63,6 +63,7 @@ class Navbar extends React.Component {
 }
 
 Navbar.propTypes = {
+    showSearch: PropTypes.bool.isRequired,
     itemsInCartCount: PropTypes.number.isRequired
 }
 

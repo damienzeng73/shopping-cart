@@ -21,11 +21,26 @@ const Main = () => {
 }
 
 class App extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            showSearch: true
+        }
+    }
+
+    componentWillReceiveProps(newProps) {
+        if (this.props.history.location.pathname === '/cart') {
+            this.setState({ showSearch: false })
+        } else {
+            this.setState({ showSearch: true })
+        }
+    }
+
     render() {
         return (
             <div>
                 <Container fluid>
-                    <Navbar itemsInCartCount={this.props.itemsInCartCount} />
+                    <Navbar showSearch={this.state.showSearch} itemsInCartCount={this.props.itemsInCartCount} />
                 </Container>
 
                 <Container id='content-wrapper'>
