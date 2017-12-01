@@ -9,7 +9,9 @@ import { addToCart } from '../actions/Cart'
 
 class ShoppingPage extends React.Component {
     componentDidMount() {
-        this.props.fetchProducts()
+        setTimeout(() => {
+            this.props.fetchProducts()
+        }, 300)
     }
 
     render() {
