@@ -8,6 +8,7 @@ import './App.css'
 import Navbar from '../components/Navbar'
 import ShoppingPage from './ShoppingPage'
 import CartPage from './CartPage'
+import { filterProducts } from '../actions/Products'
 
 const Main = () => {
     return (
@@ -40,7 +41,12 @@ class App extends React.Component {
         return (
             <div>
                 <Container fluid>
-                    <Navbar showSearch={this.state.showSearch} itemsInCartCount={this.props.itemsInCartCount} />
+                    <Navbar
+                        showSearch={this.state.showSearch}
+                        itemsInCartCount={this.props.itemsInCartCount}
+                        products={this.props.products}
+                        filterProducts={this.props.filterProducts}
+                    />
                 </Container>
 
                 <Container id='content-wrapper'>
@@ -52,14 +58,17 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-    itemsInCartCount: PropTypes.number.isRequired
+    itemsInCartCount: PropTypes.number.isRequired,
+    products: PropTypes.array,
+    filterProducts: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
     return {
-        itemsInCartCount: state.cart.length
+        itemsInCartCount: state.cart.length,
+        products: state.products.data
     }
 }
 
 
-export default withRouter(connect(mapStateToProps, {})(App))
+export default withRouter(connect(mapStateToProps, { filterProducts })(App))

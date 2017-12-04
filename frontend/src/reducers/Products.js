@@ -1,4 +1,4 @@
-import { FETCH_PRODUCTS_REQUEST, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_FAILURE } from '../constants/ActionTypes'
+import { FETCH_PRODUCTS_REQUEST, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_FAILURE, FILTER_PRODUCTS } from '../constants/ActionTypes'
 
 const products = (state={}, action={}) => {
     switch (action.type) {
@@ -20,6 +20,12 @@ const products = (state={}, action={}) => {
                 ...state,
                 isLoading: false,
                 error: action.payload
+            }
+
+        case FILTER_PRODUCTS:
+            return {
+                ...state,
+                data: action.payload
             }
 
         default:

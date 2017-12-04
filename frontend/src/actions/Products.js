@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { FETCH_PRODUCTS_REQUEST, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_FAILURE } from '../constants/ActionTypes'
+import { FETCH_PRODUCTS_REQUEST, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_FAILURE, FILTER_PRODUCTS } from '../constants/ActionTypes'
 
 export const fetchProductsRequest = () => {
     return {
@@ -32,5 +32,12 @@ export const fetchProducts = () => {
             .catch((err) => {
                 dispatch(fetchProductsFailure(err))
             })
+    }
+}
+
+export const filterProducts = (products) => {
+    return {
+        type: FILTER_PRODUCTS,
+        payload: products
     }
 }
