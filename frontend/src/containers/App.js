@@ -29,7 +29,7 @@ class App extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if (this.props.history.location.pathname === '/cart') {
+        if (this.props.history.location.pathname !== '/') {
             this.setState({ showSearch: false })
         } else {
             this.setState({ showSearch: true })
