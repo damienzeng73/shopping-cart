@@ -13,7 +13,6 @@ class Navbar extends React.Component {
         }
 
         this.handleOnScroll = this.handleOnScroll.bind(this)
-        this.handleItemOnClick = this.handleItemOnClick.bind(this)
     }
 
     componentDidMount() {
@@ -33,9 +32,6 @@ class Navbar extends React.Component {
         this.setState({ className })
     }
 
-    handleItemOnClick(e, obj) {
-    }
-
     render() {
         return (
             <Menu id='navbar' className={this.state.className} size='massive' fixed='top' secondary>
@@ -45,15 +41,15 @@ class Navbar extends React.Component {
 
                 <Menu.Menu position='right'>
                     <Menu.Item>
-                        <Input transparent icon={{ name: 'search', link: true }} placeholder='Search...' style={this.props.showSearch ? null : {display: 'none'}}/>
+                        <Input transparent icon={{ name: 'search', link: true }} placeholder='Search...' style={this.props.showSearch ? null : {display: 'none'}} />
                     </Menu.Item>
 
-                    <Menu.Item as={Link} to='/cart' onClick={this.handleItemOnClick}>
+                    <Menu.Item as={Link} to='/cart'>
                         <Icon name='shop' />
                         <Label color='red' floating>{this.props.itemsInCartCount}</Label>
                     </Menu.Item>
 
-                    <Menu.Item as={Link} to='/account' onClick={this.handleItemOnClick}>
+                    <Menu.Item as={Link} to='/account'>
                         <Icon name='user' />
                     </Menu.Item>
                 </Menu.Menu>
