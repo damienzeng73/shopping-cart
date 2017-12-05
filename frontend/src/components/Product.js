@@ -75,30 +75,32 @@ class Product extends React.Component {
 
                 <Modal.Content image>
                     <Grid>
-                        <Grid.Column width='6'>
-                            <Image src={this.props.product.image_url} alt='img' wrapped />
-                        </Grid.Column>
+                        <Grid.Row>
+                            <Grid.Column width={6}>
+                                <Image src={this.props.product.image_url} alt='img' wrapped />
+                            </Grid.Column>
 
-                        <Grid.Column width='10'>
-                            <Modal.Description>
-                                <Header id='product-name' as='h1'>{this.props.product.name}</Header>
-                                <Header id='price' as='h2'>${this.props.product.price}</Header>
-                                <Header id='rating' sub>
-                                    <Rating icon='star' defaultRating={this.props.product.rating} maxRating={5} disabled />
-                                </Header>
+                            <Grid.Column width={10}>
+                                <Modal.Description>
+                                    <Header id='product-name' as='h1'>{this.props.product.name}</Header>
+                                    <Header id='price' as='h2'>${this.props.product.price}</Header>
+                                    <Header id='rating' sub>
+                                        <Rating icon='star' defaultRating={this.props.product.rating} maxRating={5} disabled />
+                                    </Header>
 
-                                <div id='quantity'>
-                                    <Button icon='minus' size='tiny' onClick={this.handleMinusCount} />
-                                    <Input value={this.state.quantity} onChange={this.handleOnChange} />
-                                    <Button icon='add' size='tiny' onClick={this.handleAddCount} />
-                                    <span>(In stock: {this.props.product.quantity})</span>
-                                </div>
+                                    <div id='quantity'>
+                                        <Button icon='minus' size='tiny' onClick={this.handleMinusCount} />
+                                        <Input value={this.state.quantity} onChange={this.handleOnChange} />
+                                        <Button icon='add' size='tiny' onClick={this.handleAddCount} />
+                                        <span>(In stock: {this.props.product.quantity})</span>
+                                    </div>
 
-                                <Divider />
+                                    <Divider />
 
-                                <p>{this.props.product.description}</p>
-                            </Modal.Description>
-                        </Grid.Column>
+                                    <p>{this.props.product.description}</p>
+                                </Modal.Description>
+                            </Grid.Column>
+                        </Grid.Row>
                     </Grid>
                 </Modal.Content>
 
