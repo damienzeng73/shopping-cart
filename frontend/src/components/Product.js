@@ -71,7 +71,7 @@ class Product extends React.Component {
 
         return (
             <Modal trigger={modalTrigger} size='large' open={this.state.modalOpen} onClose={this.handleModalOnClose} closeIcon>
-                <Modal.Header>Product details</Modal.Header>
+                <Modal.Header>Product Details</Modal.Header>
 
                 <Modal.Content image>
                     <Grid>
