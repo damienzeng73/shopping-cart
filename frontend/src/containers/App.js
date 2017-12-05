@@ -8,6 +8,7 @@ import './App.css'
 import Navbar from '../components/Navbar'
 import ShoppingPage from './ShoppingPage'
 import CartPage from './CartPage'
+import AccountPage from './AccountPage'
 import { filterProducts } from '../actions/Products'
 
 const Main = () => {
@@ -16,6 +17,7 @@ const Main = () => {
             <Switch>
                 <Route exact path='/' component={ShoppingPage} />
                 <Route path='/cart' component={CartPage} />
+                <Route path='/account' component={AccountPage} />
             </Switch>
         </main>
     )
