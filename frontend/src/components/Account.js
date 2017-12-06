@@ -1,34 +1,156 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Form, Segment, Button, Divider, Modal } from 'semantic-ui-react'
+import _ from 'lodash'
 
 class Account extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            login: {
+                usernameOrEmail: '',
+                password: ''
+            },
+            signup: {
+                username: '',
+                email: '',
+                password: '',
+                confirmPassword: ''
+            },
+            modalOpen: false
+        }
+
+        this.handleLoginOnChange = this.handleLoginOnChange.bind(this)
+        this.handleSignupOnChange = this.handleSignupOnChange.bind(this)
+        this.handleModalOpen = this.handleModalOpen.bind(this)
+        this.handleModalOnClose = this.handleModalOnClose.bind(this)
+        this.handleUserSignup = this.handleUserSignup.bind(this)
+    }
+
+    handleLoginOnChange(e) {
+        let login = _.assign({}, this.state.login)
+
+        login[e.target.name] = e.target.value
+        this.setState({ login })
+    }
+
+    handleSignupOnChange(e) {
+        let signup = _.assign({}, this.state.signup)
+
+        signup[e.target.name] = e.target.value
+        this.setState({ signup })
+    }
+
+    handleModalOpen() {
+        this.setState({ modalOpen: true })
+    }
+
+    handleModalOnClose() {
+        let signup = {
+            username: '',
+            email: '',
+            password: '',
+            confirmPassword: ''
+        }
+
+        this.setState({ signup, modalOpen: false })
+    }
+
+    handleUserSignup() {
+        this.props.userSignupRequest(this.state.signup)
+        this.handleModalOnClose()
+    }
+
     render() {
+        const modalTrigger =
+            <Button
+                secondary={true}
+                fluid={true}
+                onClick={this.handleModalOpen}
+                >Sign Up Now
+            </Button>
+
         return (
             <Form>
-                <Form.Input label='Username or E-mail' placeholder='Username or E-mail' />
-                <Form.Input label='Password' placeholder='Password' type='password' />
+                <Form.Input
+                    name='usernameOrEmail'
+                    value={this.state.login.usernameOrEmail}
+                    label='Username or E-mail'
+                    placeholder='Username or E-mail'
+                    onChange={this.handleLoginOnChange}
+                />
+
+                <Form.Input
+                    type='password'
+                    name='password'
+                    value={this.state.login.password}
+                    label='Password'
+                    placeholder='Password'
+                    onChange={this.handleLoginOnChange}
+                />
+
                 <Segment padded>
                     <Button primary fluid>Login</Button>
                     <Divider horizontal>Or</Divider>
-                    <Modal trigger={<Button secondary fluid>Sign Up Now</Button>} closeIcon>
+                    <Modal trigger={modalTrigger} open={this.state.modalOpen} onClose={this.handleModalOnClose} closeIcon>
                         <Modal.Header>Sign Up Now</Modal.Header>
                         <Modal.Content>
                             <Form>
-                                <Form.Input label='Username' placeholder='Username' />
-                                <Form.Input label='E-mail' placeholder='E-mail' />
-                                <Form.Input label='Password' placeholder='Password' type='password' />
-                                <Form.Input label='Confirm password' placeholder='Confirm password' type='password' />
+                                <Form.Input
+                                    name='username'
+                                    value={this.state.signup.username}
+                                    label='Username'
+                                    placeholder='Username'
+                                    onChange={this.handleSignupOnChange}
+                                />
+
+                                <Form.Input
+                                    name='email'
+                                    value={this.state.signup.email}
+                                    label='E-mail'
+                                    placeholder='E-mail'
+                                    onChange={this.handleSignupOnChange}
+                                />
+
+                                <Form.Input
+                                    type='password'
+                                    name='password'
+                                    value={this.state.signup.password}
+                                    label='Password'
+                                    placeholder='Password'
+                                    onChange={this.handleSignupOnChange}
+                                />
+
+                                <Form.Input
+                                    type='password'
+                                    name='confirmPassword'
+                                    value={this.state.signup.confirmPassword}
+                                    label='Confirm password'
+                                    placeholder='Confirm password'
+                                    onChange={this.handleSignupOnChange}
+                                />
+
                             </Form>
                         </Modal.Content>
 
                         <Modal.Actions>
-                            <Button primary content='Sign up' icon='signup' labelPosition='right' />
+                            <Button
+                                primary={true}
+                                content='Sign up'
+                                icon='signup'
+                                labelPosition='right'
+                                onClick={this.handleUserSignup}
+                            />
                         </Modal.Actions>
                     </Modal>
                 </Segment>
             </Form>
         )
     }
+}
+
+Account.propTypes = {
+    userSignupRequest: PropTypes.func.isRequired
 }
 
 

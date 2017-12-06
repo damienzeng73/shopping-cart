@@ -16,12 +16,13 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
-from cart.views import ProductsViewSet
+from cart.views import ProductsViewSet, signup
 
 router = DefaultRouter()
 router.register(r'products', ProductsViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/', include(router.urls))
+    url(r'^api/', include(router.urls)),
+    url(r'^signup/$', signup)
 ]
