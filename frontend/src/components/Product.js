@@ -12,18 +12,12 @@ class Product extends React.Component {
             modalOpen: false
         }
 
-        this.handleOnClick = this.handleOnClick.bind(this)
         this.handleOnChange = this.handleOnChange.bind(this)
         this.handleMinusCount = this.handleMinusCount.bind(this)
         this.handleAddCount = this.handleAddCount.bind(this)
         this.handleModalOpen = this.handleModalOpen.bind(this)
         this.handleModalOnClose = this.handleModalOnClose.bind(this)
-    }
-
-    handleOnClick(e, product, quantity) {
-        e.stopPropagation()
-        this.props.addToCart(product, quantity)
-        this.handleModalOnClose()
+        this.handleAddToCart = this.handleAddToCart.bind(this)
     }
 
     handleOnChange(e) {
@@ -48,6 +42,11 @@ class Product extends React.Component {
 
     handleModalOnClose() {
         this.setState({ quantity: 1, modalOpen: false })
+    }
+
+    handleAddToCart() {
+        this.props.addToCart(this.props.product, this.state.quantity)
+        this.handleModalOnClose()
     }
 
     render() {
@@ -105,7 +104,13 @@ class Product extends React.Component {
                 </Modal.Content>
 
                 <Modal.Actions>
-                    <Button primary content='Add to cart' icon='add to cart' labelPosition='right' onClick={(e) => this.handleOnClick(e, this.props.product, this.state.quantity)} />
+                    <Button
+                        primary={true}
+                        content='Add to cart'
+                        icon='add to cart'
+                        labelPosition='right'
+                        onClick={this.handleAddToCart}
+                    />
                 </Modal.Actions>
             </Modal>
         )
