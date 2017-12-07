@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
 
-from cart.models import Products, User
+from rest_framework import viewsets, permissions
+from cart.models import Products
 from cart.serializers import ProductsSerializer
-from rest_framework import viewsets
+from cart.serializers import UserSerializer
+from cart.permissions import IsOwnerOrReadOnly
 
 import json
 import logging
@@ -13,6 +16,18 @@ import logging
 class ProductsViewSet(viewsets.ModelViewSet):
     queryset = Products.objects.all().order_by('-name')
     serializer_class = ProductsSerializer
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+        IsOwnerOrReadOnly,
+    )
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 @csrf_exempt

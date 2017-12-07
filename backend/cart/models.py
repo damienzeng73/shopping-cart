@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 
 # Create your models here.
 class Products(models.Model):
@@ -10,6 +10,7 @@ class Products(models.Model):
     rating = models.PositiveSmallIntegerField(default=0)
     description = models.TextField(default='Product description.')
     image_url = models.TextField(default='')
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='products', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'products'
