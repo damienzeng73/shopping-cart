@@ -11,8 +11,13 @@ class ProductsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
-    products = serializers.PrimaryKeyRelatedField(many=True, queryset=Products.objects.all())
+    products = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'products')
+        fields = ('id', 'username', 'email', 'password', 'products')
+        extra_kwargs = {
+            'password': {
+                'write_only': True
+            }
+        }

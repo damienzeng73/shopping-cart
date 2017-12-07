@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
 
 from rest_framework import viewsets, permissions
 from cart.models import Products
 from cart.serializers import ProductsSerializer
 from cart.serializers import UserSerializer
 from cart.permissions import IsOwnerOrReadOnly
+from cart.permissions import IsStaffOrTargetUser
 
 import json
 import logging
@@ -18,7 +19,7 @@ class ProductsViewSet(viewsets.ModelViewSet):
     serializer_class = ProductsSerializer
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
-        IsOwnerOrReadOnly,
+        IsOwnerOrReadOnly
     )
 
     def perform_create(self, serializer):
@@ -29,16 +30,14 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    def get_permissions(self):
+        # allow non-authenticated user to create via POST
+        return (permissions.AllowAny() if self.request.method == 'POST' else IsStaffOrTargetUser()),
 
-@csrf_exempt
-def signup(request):
-    user_info = json.loads(request.body.decode('utf-8'))
-    user = User.objects.create_user(
-        username=user_info['username'],
-        email=user_info['email'],
-        password=user_info['password']
-    )
+    def perform_create(self, serializer):
+        password = make_password(self.request.data['password'])
+        serializer.save(password=password)
 
-    user.save()
-
-    return JsonResponse(None, safe=False)
+    def perform_update(self, serializer):
+        password = make_password(self.request.data['password'])
+        serializer.save(password=password)
