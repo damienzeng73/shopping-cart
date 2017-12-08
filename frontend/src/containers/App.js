@@ -10,6 +10,7 @@ import ShoppingPage from './ShoppingPage'
 import CartPage from './CartPage'
 import AccountPage from './AccountPage'
 import { filterProducts } from '../actions/Products'
+import { checkAuthorizationToken } from '../actions/Auth'
 
 const Main = () => {
     return (
@@ -28,6 +29,12 @@ class App extends React.Component {
         super(props)
         this.state = {
             showSearch: true
+        }
+    }
+
+    componentDidMount() {
+        if (localStorage.jwtToken) {
+            this.props.checkAuthorizationToken(localStorage.jwtToken)
         }
     }
 
@@ -62,7 +69,8 @@ class App extends React.Component {
 App.propTypes = {
     itemsInCartCount: PropTypes.number.isRequired,
     products: PropTypes.array,
-    filterProducts: PropTypes.func.isRequired
+    filterProducts: PropTypes.func.isRequired,
+    checkAuthorizationToken: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
@@ -73,4 +81,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default withRouter(connect(mapStateToProps, { filterProducts })(App))
+export default withRouter(connect(mapStateToProps, { filterProducts, checkAuthorizationToken })(App))

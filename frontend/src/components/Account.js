@@ -24,6 +24,7 @@ class Account extends React.Component {
         this.handleSignupOnChange = this.handleSignupOnChange.bind(this)
         this.handleModalOpen = this.handleModalOpen.bind(this)
         this.handleModalOnClose = this.handleModalOnClose.bind(this)
+        this.handleUserLogin = this.handleUserLogin.bind(this)
         this.handleUserSignup = this.handleUserSignup.bind(this)
     }
 
@@ -56,6 +57,11 @@ class Account extends React.Component {
         this.setState({ signup, modalOpen: false })
     }
 
+    handleUserLogin() {
+        this.props.login(this.state.login.usernameOrEmail, this.state.login.password)
+        this.props.history.push('/')
+    }
+
     handleUserSignup() {
         this.props.userSignupRequest(this.state.signup)
         this.handleModalOnClose()
@@ -74,7 +80,7 @@ class Account extends React.Component {
             <Form>
                 <Form.Input
                     name='usernameOrEmail'
-                    value={this.state.login.usernameOrEmail}
+                    value={this.state.login.username}
                     label='Username or E-mail'
                     placeholder='Username or E-mail'
                     onChange={this.handleLoginOnChange}
@@ -90,8 +96,15 @@ class Account extends React.Component {
                 />
 
                 <Segment padded>
-                    <Button primary fluid>Login</Button>
+                    <Button
+                        primary={true}
+                        fluid={true}
+                        onClick={this.handleUserLogin}
+                        >Login
+                    </Button>
+
                     <Divider horizontal>Or</Divider>
+
                     <Modal trigger={modalTrigger} open={this.state.modalOpen} onClose={this.handleModalOnClose} closeIcon>
                         <Modal.Header>Sign Up Now</Modal.Header>
                         <Modal.Content>
@@ -150,7 +163,9 @@ class Account extends React.Component {
 }
 
 Account.propTypes = {
-    userSignupRequest: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired,
+    userSignupRequest: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired
 }
 
 
