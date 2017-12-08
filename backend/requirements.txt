@@ -1,0 +1,7 @@
+Django==1.11.7
+djangorestframework==3.7.3
+djangorestframework-jwt==1.11.0
+pkg-resources==0.0.0
+psycopg2==2.7.3.2
+PyJWT==1.5.3
+pytz==2017.3
