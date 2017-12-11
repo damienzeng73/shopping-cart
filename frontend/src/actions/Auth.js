@@ -71,6 +71,7 @@ export const checkAuthorizationToken = (token) => {
             .catch((err) => {
                 if (err.response.status === 400 && err.response.data.non_field_errors[0] === 'Signature has expired.') {
                     dispatch(logout())
+                    window.location.reload()
                 }
             })
     }

@@ -25,6 +25,7 @@ class Account extends React.Component {
         this.handleModalOpen = this.handleModalOpen.bind(this)
         this.handleModalOnClose = this.handleModalOnClose.bind(this)
         this.handleUserLogin = this.handleUserLogin.bind(this)
+        this.handleUserLogout = this.handleUserLogout.bind(this)
         this.handleUserSignup = this.handleUserSignup.bind(this)
     }
 
@@ -62,6 +63,11 @@ class Account extends React.Component {
         this.props.history.push('/')
     }
 
+    handleUserLogout() {
+        this.props.logout()
+        this.props.history.push('/')
+    }
+
     handleUserSignup() {
         this.props.userSignupRequest(this.state.signup)
         this.handleModalOnClose()
@@ -76,7 +82,7 @@ class Account extends React.Component {
                 >Sign Up Now
             </Button>
 
-        return (
+        const notLoggedIn =
             <Form>
                 <Form.Input
                     name='usernameOrEmail'
@@ -158,14 +164,33 @@ class Account extends React.Component {
                     </Modal>
                 </Segment>
             </Form>
+
+        const isLoggedIn =
+            <div>
+                <h1>Logged in as {this.props.auth.user.username}</h1>
+                <Button
+                    primary={true}
+                    content='Log out'
+                    icon='log out'
+                    labelPosition='right'
+                    onClick={this.handleUserLogout}
+                />
+            </div>
+
+        return (
+            <div>
+                {this.props.auth.isAuthenticated ? isLoggedIn : notLoggedIn}
+            </div>
         )
     }
 }
 
 Account.propTypes = {
     login: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
     userSignupRequest: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired
 }
 
 
