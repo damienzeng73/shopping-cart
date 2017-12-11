@@ -131,3 +131,7 @@ REST_FRAMEWORK = {
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     )
 }
+
+JWT_AUTH = {
+    'JWT_ALLOW_REFRESH': True
+}
