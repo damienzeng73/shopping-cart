@@ -3,6 +3,7 @@ import jwtDecode from 'jwt-decode'
 import toastr from 'toastr'
 
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../constants/ActionTypes'
+import { fetchProducts } from './Products'
 import { TOASTR_OPTIONS } from '../constants/Common'
 toastr.options = TOASTR_OPTIONS
 
@@ -75,7 +76,7 @@ export const checkAuthorizationToken = (token) => {
             .catch((err) => {
                 if (err.response.status === 400 && err.response.data.non_field_errors[0] === 'Signature has expired.') {
                     dispatch(logout())
-                    window.location.reload()
+                    dispatch(fetchProducts())
                 }
             })
     }
