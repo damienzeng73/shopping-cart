@@ -1,7 +1,10 @@
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
+import toastr from 'toastr'
 
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../constants/ActionTypes'
+import { TOASTR_OPTIONS } from '../constants/Common'
+toastr.options = TOASTR_OPTIONS
 
 export const loginRequest = (username) => {
     return {
@@ -41,6 +44,7 @@ export const login = (username, password) => {
                 localStorage.setItem('jwtToken', token)
                 setAuthorizationToken(token)
                 dispatch(loginSuccess(jwtDecode(token)))
+                toastr.success(`Logged in as <b>${username}</b>.`)
             })
             .catch((err) => {
                 dispatch(loginFailure(err))

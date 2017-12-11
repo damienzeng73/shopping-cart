@@ -1,8 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Modal, Card, Image, Rating, Grid, Header, Divider, Button, Input } from 'semantic-ui-react'
+import toastr from 'toastr'
 
 import './Product.css'
+import { TOASTR_OPTIONS } from '../constants/Common'
+toastr.options = TOASTR_OPTIONS
 
 class Product extends React.Component {
     constructor(props) {
@@ -47,6 +50,7 @@ class Product extends React.Component {
     handleAddToCart() {
         this.props.addToCart(this.props.product, this.state.quantity)
         this.handleModalOnClose()
+        toastr.success(`Added <b>${this.props.product.name}</b> into shopping-cart.`)
     }
 
     render() {

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Step, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import toastr from 'toastr'
 
 import Cart from '../components/Cart'
 import Shipping from '../components/Shipping'
@@ -11,6 +12,8 @@ import Confirmation from '../components/Confirmation'
 import { removeFromCart, clearCart, placeOrder } from '../actions/Cart'
 import { setShippingOptions } from '../actions/Shipping'
 import { setBillingOptions } from '../actions/Billing'
+import { TOASTR_OPTIONS } from '../constants/Common'
+toastr.options = TOASTR_OPTIONS
 
 class CartPage extends React.Component {
     constructor(props) {
@@ -36,10 +39,12 @@ class CartPage extends React.Component {
 
     submit() {
         if (!this.props.auth.isAuthenticated) {
+            toastr.warning("You have to login first to make an order.")
             this.props.history.push('/account')
         } else {
             this.props.placeOrder(this.props.cart, this.props.shipping.data, this.props.billing.data)
             this.props.history.push('/')
+            toastr.success("Placing order successfully.")
         }
     }
 
