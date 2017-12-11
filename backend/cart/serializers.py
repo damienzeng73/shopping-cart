@@ -1,13 +1,20 @@
 from django.contrib.auth.models import User
 
 from rest_framework import serializers
-from cart.models import Products
+from cart.models import Products, Orders
 
 class ProductsSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Products
+        fields = '__all__'
+
+class OrdersSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+
+    class Meta:
+        model = Orders
         fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):

@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Segment, Button, Divider, Modal } from 'semantic-ui-react'
+import { Form, Segment, Button, Divider, Modal, Message, Header } from 'semantic-ui-react'
 import _ from 'lodash'
+
+import OrderList from './OrderList'
 
 class Account extends React.Component {
     constructor(props) {
@@ -167,11 +169,22 @@ class Account extends React.Component {
 
         const isLoggedIn =
             <div>
-                <h1>Logged in as {this.props.auth.user.username}</h1>
+                <Message info>
+                    Logged in as <b>{this.props.auth.user.username}</b>
+                </Message>
+
+                <Header as='h3' attached='top'>My orders</Header>
+                <Segment attached>
+                    <OrderList orders={this.props.orders} />
+                </Segment>
+
+                <Divider />
+
                 <Button
                     primary={true}
                     content='Log out'
                     icon='log out'
+                    floated='right'
                     labelPosition='right'
                     onClick={this.handleUserLogout}
                 />
@@ -190,7 +203,8 @@ Account.propTypes = {
     logout: PropTypes.func.isRequired,
     userSignupRequest: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    orders: PropTypes.array
 }
 
 

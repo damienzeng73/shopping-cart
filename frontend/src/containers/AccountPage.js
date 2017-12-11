@@ -5,9 +5,15 @@ import { withRouter } from 'react-router-dom'
 
 import Account from '../components/Account'
 import { login, logout } from '../actions/Auth'
-import { userSignupRequest } from '../actions/Account'
+import { userSignupRequest, fetchOrders } from '../actions/Account'
 
 class AccountPage extends React.Component {
+    componentDidMount() {
+        if (this.props.auth.isAuthenticated) {
+            this.props.fetchOrders()
+        }
+    }
+
     render() {
         return (
             <Account
@@ -16,6 +22,7 @@ class AccountPage extends React.Component {
                 userSignupRequest={this.props.userSignupRequest}
                 history={this.props.history}
                 auth={this.props.auth}
+                orders={this.props.orders}
             />
         )
     }
@@ -23,7 +30,8 @@ class AccountPage extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.auth
+        auth: state.auth,
+        orders: state.account.data
     }
 }
 
@@ -32,8 +40,10 @@ AccountPage.propTypes = {
     logout: PropTypes.func.isRequired,
     userSignupRequest: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    fetchOrders: PropTypes.func.isRequired,
+    orders: PropTypes.array
 }
 
 
-export default withRouter(connect(mapStateToProps, { login, logout, userSignupRequest })(AccountPage))
+export default withRouter(connect(mapStateToProps, { login, logout, userSignupRequest, fetchOrders })(AccountPage))

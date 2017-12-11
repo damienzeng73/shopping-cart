@@ -44,7 +44,6 @@ class CartPage extends React.Component {
         } else {
             this.props.placeOrder(this.props.cart, this.props.shipping.data, this.props.billing.data)
             this.props.history.push('/')
-            toastr.success("Placing order successfully.")
         }
     }
 

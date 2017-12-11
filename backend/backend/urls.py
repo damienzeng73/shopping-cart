@@ -18,10 +18,11 @@ from django.contrib import admin
 
 from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token, refresh_jwt_token
-from cart.views import ProductsViewSet, UserViewSet
+from cart.views import ProductsViewSet, OrdersViewSet, UserViewSet
 
 router = DefaultRouter()
 router.register(r'products', ProductsViewSet)
+router.register(r'orders', OrdersViewSet)
 router.register(r'users', UserViewSet)
 
 urlpatterns = [
