@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Segment, Table, Button, Divider, Header, Radio, Input } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
 import _ from 'lodash'
 
 class Confirmation extends React.Component {
@@ -112,7 +111,7 @@ class Confirmation extends React.Component {
                 <Button.Group floated='right'>
                     <Button primary onClick={(e) => this.props.previousStep()}>Previous step</Button>
                     <Button.Or />
-                    <Button color='red' onClick={this.submit} as={Link} to='/'>Place order</Button>
+                    <Button color='red' onClick={this.submit}>Place order</Button>
                 </Button.Group>
             </div>
         )

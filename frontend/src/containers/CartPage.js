@@ -22,8 +22,8 @@ class CartPage extends React.Component {
         this.nextStep = this.nextStep.bind(this)
         this.previousStep = this.previousStep.bind(this)
         this.submit = this.submit.bind(this)
-        this.showStep = this.showStep.bind(this)
         this.handleRemoveItem = this.handleRemoveItem.bind(this)
+        this.showStep = this.showStep.bind(this)
     }
 
     nextStep() {
@@ -35,7 +35,17 @@ class CartPage extends React.Component {
     }
 
     submit() {
-        this.props.placeOrder(this.props.cart, this.props.shipping.data, this.props.billing.data)
+        if (!this.props.auth.isAuthenticated) {
+            this.props.history.push('/account')
+        } else {
+            this.props.placeOrder(this.props.cart, this.props.shipping.data, this.props.billing.data)
+            this.props.history.push('/')
+        }
+    }
+
+    handleRemoveItem(e, item) {
+        e.stopPropagation()
+        this.props.removeFromCart(item.id)
     }
 
     showStep() {
@@ -76,11 +86,6 @@ class CartPage extends React.Component {
             default:
                 return
         }
-    }
-
-    handleRemoveItem(e, item) {
-        e.stopPropagation()
-        this.props.removeFromCart(item.id)
     }
 
     render() {
@@ -132,14 +137,17 @@ CartPage.propTypes = {
     setShippingOptions: PropTypes.func.isRequired,
     setBillingOptions: PropTypes.func.isRequired,
     clearCart: PropTypes.func.isRequired,
-    placeOrder: PropTypes.func.isRequired
+    placeOrder: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => {
     return {
         cart: state.cart,
         shipping: state.shipping,
-        billing: state.billing
+        billing: state.billing,
+        auth: state.auth
     }
 }
 
