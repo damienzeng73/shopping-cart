@@ -49,6 +49,9 @@ export const login = (username, password) => {
             })
             .catch((err) => {
                 dispatch(loginFailure(err))
+                if (err.response.status === 400 && err.response.data.non_field_errors[0] === 'Unable to log in with provided credentials.') {
+                    toastr.error("Log in failed, please check your credentials again.")
+                }
             })
     }
 }

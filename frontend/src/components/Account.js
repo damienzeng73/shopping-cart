@@ -62,7 +62,6 @@ class Account extends React.Component {
 
     handleUserLogin() {
         this.props.login(this.state.login.usernameOrEmail, this.state.login.password)
-        this.props.history.push('/')
     }
 
     handleUserLogout() {
