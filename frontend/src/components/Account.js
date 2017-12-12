@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Segment, Button, Divider, Modal, Message, Header } from 'semantic-ui-react'
+import { Form, Segment, Button, Divider, Modal, Message, Header, TextArea, Image } from 'semantic-ui-react'
 import _ from 'lodash'
 
 import OrderList from './OrderList'
+import SelfProductList from './SelfProductList'
 
 class Account extends React.Component {
     constructor(props) {
@@ -19,16 +20,29 @@ class Account extends React.Component {
                 password: '',
                 confirmPassword: ''
             },
+            newProduct: {
+                category: '',
+                name: '',
+                price: 0.00,
+                quantity: 1,
+                description: '',
+                imageUrl: ''
+            },
+            signupModalOpen: false,
             modalOpen: false
         }
 
         this.handleLoginOnChange = this.handleLoginOnChange.bind(this)
         this.handleSignupOnChange = this.handleSignupOnChange.bind(this)
-        this.handleModalOpen = this.handleModalOpen.bind(this)
-        this.handleModalOnClose = this.handleModalOnClose.bind(this)
+        this.handleSignupModalOpen = this.handleSignupModalOpen.bind(this)
+        this.handleSignupModalOnClose = this.handleSignupModalOnClose.bind(this)
         this.handleUserLogin = this.handleUserLogin.bind(this)
         this.handleUserLogout = this.handleUserLogout.bind(this)
         this.handleUserSignup = this.handleUserSignup.bind(this)
+        this.handleModalOpen = this.handleModalOpen.bind(this)
+        this.handleModalOnClose = this.handleModalOnClose.bind(this)
+        this.handleNewProductOnChange = this.handleNewProductOnChange.bind(this)
+        this.handleAddNewProduct = this.handleAddNewProduct.bind(this)
     }
 
     handleLoginOnChange(e) {
@@ -45,11 +59,11 @@ class Account extends React.Component {
         this.setState({ signup })
     }
 
-    handleModalOpen() {
-        this.setState({ modalOpen: true })
+    handleSignupModalOpen() {
+        this.setState({ signupModalOpen: true })
     }
 
-    handleModalOnClose() {
+    handleSignupModalOnClose() {
         let signup = {
             username: '',
             email: '',
@@ -57,7 +71,7 @@ class Account extends React.Component {
             confirmPassword: ''
         }
 
-        this.setState({ signup, modalOpen: false })
+        this.setState({ signup, signupModalOpen: false })
     }
 
     handleUserLogin() {
@@ -71,15 +85,44 @@ class Account extends React.Component {
 
     handleUserSignup() {
         this.props.userSignupRequest(this.state.signup)
+        this.handleSignupModalOnClose()
+    }
+
+    handleModalOpen() {
+        this.setState({ modalOpen: true })
+    }
+
+    handleModalOnClose() {
+        let newProduct = {
+            category: '',
+            name: '',
+            price: 0.00,
+            quantity: 1,
+            description: '',
+            imageUrl: ''
+        }
+
+        this.setState({ newProduct, modalOpen: false })
+    }
+
+    handleNewProductOnChange(e) {
+        let newProduct = _.assign({}, this.state.newProduct)
+
+        newProduct[e.target.name] = e.target.value
+        this.setState({ newProduct })
+    }
+
+    handleAddNewProduct() {
+        this.props.addNewProduct(this.state.newProduct)
         this.handleModalOnClose()
     }
 
     render() {
-        const modalTrigger =
+        const signupModalTrigger =
             <Button
                 secondary={true}
                 fluid={true}
-                onClick={this.handleModalOpen}
+                onClick={this.handleSignupModalOpen}
                 >Sign Up Now
             </Button>
 
@@ -112,7 +155,7 @@ class Account extends React.Component {
 
                     <Divider horizontal>Or</Divider>
 
-                    <Modal trigger={modalTrigger} open={this.state.modalOpen} onClose={this.handleModalOnClose} closeIcon>
+                    <Modal trigger={signupModalTrigger} open={this.state.signupModalOpen} onClose={this.handleSignupModalOnClose} closeIcon>
                         <Modal.Header>Sign Up Now</Modal.Header>
                         <Modal.Content>
                             <Form>
@@ -166,6 +209,13 @@ class Account extends React.Component {
                 </Segment>
             </Form>
 
+        const modalTrigger =
+            <Button
+                secondary={true}
+                content='Add new product'
+                onClick={this.handleModalOpen}
+            />
+
         const isLoggedIn =
             <div>
                 <Message info>
@@ -177,7 +227,94 @@ class Account extends React.Component {
                     <OrderList orders={this.props.orders} />
                 </Segment>
 
+                <Header as='h3' attached='top'>Manage my products</Header>
+                <Segment attached>
+                    <SelfProductList products={this.props.products} updateProduct={this.props.updateProduct} />
+
+                    <Modal trigger={modalTrigger} open={this.state.modalOpen} onClose={this.handleModalOnClose} closeIcon>
+                        <Modal.Header>Add new prodcut</Modal.Header>
+                        <Modal.Content>
+                            <Form>
+                                <Form.Input
+                                    name='category'
+                                    value={this.state.newProduct.category}
+                                    label='Category'
+                                    placeholder='Category'
+                                    onChange={this.handleNewProductOnChange}
+                                />
+
+                                <Form.Input
+                                    name='name'
+                                    value={this.state.newProduct.name}
+                                    label='Name'
+                                    placeholder='Name'
+                                    onChange={this.handleNewProductOnChange}
+                                />
+
+                                <Form.Input
+                                    name='price'
+                                    value={this.state.newProduct.price}
+                                    label='Price'
+                                    placeholder='Price'
+                                    onChange={this.handleNewProductOnChange}
+                                />
+
+                                <Form.Input
+                                    type='number'
+                                    min='0'
+                                    name='quantity'
+                                    value={this.state.newProduct.quantity}
+                                    label='Quantity'
+                                    placeholder='Quantity'
+                                    onChange={this.handleNewProductOnChange}
+                                />
+
+                                <TextArea
+                                    name='description'
+                                    value={this.state.newProduct.description}
+                                    label='Description'
+                                    placeholder='Description'
+                                    onChange={this.handleNewProductOnChange}
+                                />
+
+                                <Form.Input
+                                    name='imageUrl'
+                                    value={this.state.newProduct.imageUrl}
+                                    label='Image URL'
+                                    placeholder='Image URL'
+                                    onChange={this.handleNewProductOnChange}
+                                />
+
+                                <Divider />
+
+                                <Image
+                                    src={this.state.newProduct.imageUrl}
+                                    size='medium'
+                                    centered={true}
+                                    rounded={true}
+                                />
+                            </Form>
+                        </Modal.Content>
+
+                        <Modal.Actions>
+                            <Button
+                                primary={true}
+                                content='Submit'
+                                onClick={this.handleAddNewProduct}
+                            />
+                        </Modal.Actions>
+                    </Modal>
+                </Segment>
+
                 <Divider />
+
+                <Button
+                    content='Back'
+                    icon='arrow circle left'
+                    floated='left'
+                    labelPosition='left'
+                    onClick={() => this.props.history.push('/')}
+                />
 
                 <Button
                     primary={true}
@@ -203,7 +340,10 @@ Account.propTypes = {
     userSignupRequest: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
-    orders: PropTypes.array
+    orders: PropTypes.array,
+    products: PropTypes.array,
+    updateProduct: PropTypes.func.isRequired,
+    addNewProduct: PropTypes.func.isRequired
 }
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-import { List } from 'semantic-ui-react'
+import { List, Message } from 'semantic-ui-react'
 
 import Order from './Order'
 
@@ -12,9 +12,14 @@ const OrderList = (props) => {
         )
     })
 
+    const noOrdersMessage =
+        <Message info>
+            You don't have any orders now.
+        </Message>
+
     return (
         <List selection divided relaxed>
-            {ordersCollection}
+            {props.orders && props.orders.length > 0 ? ordersCollection : noOrdersMessage}
         </List>
     )
 }

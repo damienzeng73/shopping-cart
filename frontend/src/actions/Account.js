@@ -2,6 +2,7 @@ import axios from 'axios'
 import toastr from 'toastr'
 
 import { FETCH_ORDERS_REQUEST, FETCH_ORDERS_SUCCESS, FETCH_ORDERS_FAILURE } from '../constants/ActionTypes'
+import { fetchProducts } from './Products'
 import { TOASTR_OPTIONS } from '../constants/Common'
 toastr.options = TOASTR_OPTIONS
 
@@ -43,6 +44,31 @@ export const fetchOrders = () => {
             })
             .catch((err) => {
                 dispatch(fetchOrdersFailure(err))
+            })
+    }
+}
+
+export const updateProduct = (productId, productData) => {
+    return dispatch => {
+        axios.put(`/api/products/${productId}/`, {category: productData.category, name: productData.name, price: productData.price, quantity: productData.quantity, image_url: productData.imageUrl})
+            .then((res) => {
+                toastr.success(`Product ${productData.name} updated successfully.`)
+            })
+            .catch((err) => {
+                toastr.error(err)
+            })
+    }
+}
+
+export const addNewProduct = (productData) => {
+    return dispatch => {
+        axios.post('/api/products/', {category: productData.category, name: productData.name, price: productData.price, quantity: productData.quantity, image_url: productData.imageUrl})
+            .then((res) => {
+                toastr.success(`Product ${productData.name} added successfully.`)
+                dispatch(fetchProducts())
+            })
+            .catch((err) => {
+                toastr.error(err)
             })
     }
 }

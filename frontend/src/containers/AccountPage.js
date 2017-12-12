@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import _ from 'lodash'
 
 import Account from '../components/Account'
 import { login, logout } from '../actions/Auth'
-import { userSignupRequest, fetchOrders } from '../actions/Account'
+import { userSignupRequest, fetchOrders, updateProduct, addNewProduct } from '../actions/Account'
 
 class AccountPage extends React.Component {
     componentDidMount() {
@@ -29,15 +30,23 @@ class AccountPage extends React.Component {
                 history={this.props.history}
                 auth={this.props.auth}
                 orders={this.props.orders}
+                products={this.props.products}
+                updateProduct={this.props.updateProduct}
+                addNewProduct={this.props.addNewProduct}
             />
         )
     }
 }
 
 const mapStateToProps = (state) => {
+    let selfProducts = _.filter(state.products.data, (element) => {
+        return element.owner === state.auth.user.username
+    })
+
     return {
         auth: state.auth,
-        orders: state.account.data
+        orders: state.account.data,
+        products: selfProducts
     }
 }
 
@@ -48,8 +57,11 @@ AccountPage.propTypes = {
     history: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
     fetchOrders: PropTypes.func.isRequired,
-    orders: PropTypes.array
+    orders: PropTypes.array,
+    products: PropTypes.array,
+    updateProduct: PropTypes.func.isRequired,
+    addNewProduct: PropTypes.func.isRequired
 }
 
 
-export default withRouter(connect(mapStateToProps, { login, logout, userSignupRequest, fetchOrders })(AccountPage))
+export default withRouter(connect(mapStateToProps, { login, logout, userSignupRequest, fetchOrders, updateProduct, addNewProduct })(AccountPage))
