@@ -14,6 +14,12 @@ class AccountPage extends React.Component {
         }
     }
 
+    componentWillReceiveProps(newProps) {
+        if (!this.props.auth.isAuthenticated && newProps.auth.isAuthenticated) {
+            this.props.fetchOrders()
+        }
+    }
+
     render() {
         return (
             <Account
