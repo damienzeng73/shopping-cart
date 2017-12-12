@@ -6,7 +6,7 @@ import _ from 'lodash'
 
 import Account from '../components/Account'
 import { login, logout } from '../actions/Auth'
-import { userSignupRequest, fetchOrders, updateProduct, addNewProduct } from '../actions/Account'
+import { userSignupRequest, fetchOrders, updateProduct, addNewProduct, deleteProduct } from '../actions/Account'
 
 class AccountPage extends React.Component {
     componentDidMount() {
@@ -33,6 +33,7 @@ class AccountPage extends React.Component {
                 products={this.props.products}
                 updateProduct={this.props.updateProduct}
                 addNewProduct={this.props.addNewProduct}
+                deleteProduct={this.props.deleteProduct}
             />
         )
     }
@@ -60,8 +61,9 @@ AccountPage.propTypes = {
     orders: PropTypes.array,
     products: PropTypes.array,
     updateProduct: PropTypes.func.isRequired,
-    addNewProduct: PropTypes.func.isRequired
+    addNewProduct: PropTypes.func.isRequired,
+    deleteProduct: PropTypes.func.isRequired
 }
 
 
-export default withRouter(connect(mapStateToProps, { login, logout, userSignupRequest, fetchOrders, updateProduct, addNewProduct })(AccountPage))
+export default withRouter(connect(mapStateToProps, { login, logout, userSignupRequest, fetchOrders, updateProduct, addNewProduct, deleteProduct })(AccountPage))

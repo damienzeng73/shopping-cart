@@ -8,7 +8,7 @@ import SelfProduct from './SelfProduct'
 const SelfProductList = (props) => {
     let productsCollection = _.map(props.products, (product, idx) => {
         return (
-            <SelfProduct key={idx} product={product} updateProduct={props.updateProduct} />
+            <SelfProduct key={idx} product={product} updateProduct={props.updateProduct} deleteProduct={props.deleteProduct} />
         )
     })
 
@@ -26,7 +26,8 @@ const SelfProductList = (props) => {
 
 SelfProductList.propTypes = {
     products: PropTypes.array,
-    updateProduct: PropTypes.func.isRequired
+    updateProduct: PropTypes.func.isRequired,
+    deleteProduct: PropTypes.func.isRequired
 }
 
 

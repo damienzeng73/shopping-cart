@@ -229,7 +229,7 @@ class Account extends React.Component {
 
                 <Header as='h3' attached='top'>Manage my products</Header>
                 <Segment attached>
-                    <SelfProductList products={this.props.products} updateProduct={this.props.updateProduct} />
+                    <SelfProductList products={this.props.products} updateProduct={this.props.updateProduct} deleteProduct={this.props.deleteProduct} />
 
                     <Modal trigger={modalTrigger} open={this.state.modalOpen} onClose={this.handleModalOnClose} closeIcon>
                         <Modal.Header>Add new prodcut</Modal.Header>
@@ -343,7 +343,8 @@ Account.propTypes = {
     orders: PropTypes.array,
     products: PropTypes.array,
     updateProduct: PropTypes.func.isRequired,
-    addNewProduct: PropTypes.func.isRequired
+    addNewProduct: PropTypes.func.isRequired,
+    deleteProduct: PropTypes.func.isRequired
 }
 
 

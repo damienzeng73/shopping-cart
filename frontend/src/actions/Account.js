@@ -72,3 +72,16 @@ export const addNewProduct = (productData) => {
             })
     }
 }
+
+export const deleteProduct = (productId, productName) => {
+    return dispatch => {
+        axios.delete(`/api/products/${productId}`)
+            .then((res) => {
+                toastr.info(`Product ${productName} has been removed.`)
+                dispatch(fetchProducts())
+            })
+            .catch((err) => {
+                toastr.error(err)
+            })
+    }
+}

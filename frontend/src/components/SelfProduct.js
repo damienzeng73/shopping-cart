@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Modal, List, Divider, Input, Label, Form, TextArea, Image, Button } from 'semantic-ui-react'
+import { Modal, List, Divider, Input, Label, Form, TextArea, Image, Button, Confirm } from 'semantic-ui-react'
 
 class SelfProduct extends React.Component {
     constructor(props) {
@@ -12,13 +12,17 @@ class SelfProduct extends React.Component {
             quantity: this.props.product.quantity,
             description: this.props.product.description,
             imageUrl: this.props.product.image_url,
-            modalOpen: false
+            modalOpen: false,
+            confirmOpen: false
         }
 
         this.handleOnChange = this.handleOnChange.bind(this)
         this.handleUpdateProduct = this.handleUpdateProduct.bind(this)
         this.handleModalOpen = this.handleModalOpen.bind(this)
         this.handleModalOnClose = this.handleModalOnClose.bind(this)
+        this.handleDeleteConfirmOpen = this.handleDeleteConfirmOpen.bind(this)
+        this.handleDeleteConfirmCancel = this.handleDeleteConfirmCancel.bind(this)
+        this.handleDeleteConfirm = this.handleDeleteConfirm.bind(this)
     }
 
     handleOnChange(e) {
@@ -36,6 +40,19 @@ class SelfProduct extends React.Component {
 
     handleModalOnClose() {
         this.setState({ modalOpen: false })
+    }
+
+    handleDeleteConfirmOpen() {
+        this.setState({ confirmOpen: true })
+    }
+
+    handleDeleteConfirmCancel() {
+        this.setState({ confirmOpen: false })
+    }
+
+    handleDeleteConfirm() {
+        this.props.deleteProduct(this.props.product.id, this.props.product.name)
+        this.setState({ modalOpen: false, confirmOpen: false })
     }
 
     render() {
@@ -130,9 +147,22 @@ class SelfProduct extends React.Component {
 
                 <Modal.Actions>
                     <Button
+                        color='red'
+                        content='Delete'
+                        floated='left'
+                        onClick={this.handleDeleteConfirmOpen}
+                    />
+
+                    <Confirm
+                        open={this.state.confirmOpen}
+                        onConfirm={this.handleDeleteConfirm}
+                        onCancel={this.handleDeleteConfirmCancel}
+                        confirmButton='Delete'
+                    />
+
+                    <Button
                         primary={true}
                         content='Update'
-                        floated='right'
                         onClick={this.handleUpdateProduct}
                     />
                 </Modal.Actions>
@@ -143,7 +173,8 @@ class SelfProduct extends React.Component {
 
 SelfProduct.propTypes = {
     product: PropTypes.object.isRequired,
-    updateProduct: PropTypes.func.isRequired
+    updateProduct: PropTypes.func.isRequired,
+    deleteProduct: PropTypes.func.isRequired
 }
 
 
