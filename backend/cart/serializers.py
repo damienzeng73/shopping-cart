@@ -10,12 +10,14 @@ class ProductsSerializer(serializers.ModelSerializer):
         model = Products
         fields = '__all__'
 
+
 class OrdersSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Orders
         fields = '__all__'
+
 
 class UserSerializer(serializers.ModelSerializer):
     products = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
