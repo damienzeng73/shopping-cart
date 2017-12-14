@@ -6,15 +6,6 @@ import { fetchProducts } from './Products'
 import { TOASTR_OPTIONS } from '../constants/Common'
 toastr.options = TOASTR_OPTIONS
 
-export const userSignupRequest = (userInfo) => {
-    return dispatch => {
-        axios.post('/api/users/', userInfo)
-            .then((res) => {
-                toastr.success("Welcome! Your account is available now.")
-            })
-    }
-}
-
 export const fetchOrdersRequest = () => {
     return {
         type: FETCH_ORDERS_REQUEST

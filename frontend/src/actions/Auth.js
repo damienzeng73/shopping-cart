@@ -84,3 +84,13 @@ export const checkAuthorizationToken = (token) => {
             })
     }
 }
+
+export const userSignupRequest = (userInfo) => {
+    return dispatch => {
+        axios.post('/api/users/', userInfo)
+            .then((res) => {
+                toastr.success("Welcome! Your account is available now.")
+            })
+    }
+}
+
