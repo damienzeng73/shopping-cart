@@ -35,8 +35,9 @@ Prepare database in postgreSQL:
 
     sudo -u postgres psql
     CREATE DATABASE shopping_cart; # Don't forget the semicolon in the end
-    
-    \q # Quit postgres shell
+
+    # Quit postgresql shell
+    \q
 
 Set up database connection in **Shopping-cart/backend/backend/settings.py** in DATABASES section:
 
