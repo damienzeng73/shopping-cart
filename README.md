@@ -1,6 +1,6 @@
 Shopping-cart
 =============
-A smiple Shopping-cart built with ReactJS and Django REST framework(DRF).
+A smiple Shopping-cart built with ReactJS and Django REST Framework(DRF).
 
 Dependencies
 ------------
@@ -10,18 +10,75 @@ Dependencies
 
 Getting Started
 ---------------
-### Shopping page
+### Installation
+Clone this repository:
+
+    git clone git@github.com:damnee562/Shopping-cart.git
+
+Create virtualenv and install all requirements in **backend** directory:
+
+    cd Shopping-cart/backend/
+    python3 -m venv venv_name
+    source venv_name/bin/activate
+    pip install -r requirements.txt
+
+Install all needed node_modules in **frontend** directory:
+
+    cd Shopping-cart/frontend/
+    npm install
+
+or if you're using yarn:
+
+    yarn install
+
+Prepare database in postgreSQL:
+
+    sudo -u postgres psql
+    CREATE DATABASE shopping_cart; # Don't forget the semicolon in the end
+    
+    \q # Quit postgres shell
+
+Set up database connection in **Shopping-cart/backend/backend/settings.py** in DATABASES section:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'shopping_cart',
+            'USER': 'YOUR_USERNAME', # replace with your own username
+            'PASSWORD': 'YOUR_PASSWORD', # replace with your own password
+            'HOST': 'localhost',
+            'PORT': ''
+        }
+    }
+
+Fire up **backend** server:
+
+    cd Shopping-cart/backend/
+    python manage.py migrate
+    python manage.py runserver
+
+Open another terminal for **frontend** server:
+
+    cd Shopping-cart/frontend/
+    npm start
+
+or if you're using yarn:
+
+    yarn start
+
+### Screenshots
+#### Shopping page
 ![alt text](https://imgur.com/3jbeIvA.png "Shopping page")
 
-### Filter products
+#### Filter products
 ![alt text](https://imgur.com/QWcVVOo.png "Filter product")
 
-### Add product into cart
+#### Add product into cart
 ![alt text](https://imgur.com/iHzLPWF.png "Product details")
 
 ![alt text](https://imgur.com/eLJKntt.png "Add product into cart")
 
-### Cart page
+#### Cart page
 ![alt text](https://imgur.com/TwbT2So.png "Cart page")
 
 ![alt text](https://imgur.com/6UNwzmT.png "Shipping options")
@@ -30,15 +87,15 @@ Getting Started
 
 ![alt text](https://imgur.com/vMcWXbZ.png "Confirm order")
 
-### Account page
+#### Account page
 ![alt text](https://imgur.com/iXTg2Wv.png "Account page")
 
-### Check orders and Manage products
+#### Check orders and Manage products
 ![alt text](https://imgur.com/5nIUe94.png "Check orders")
 
 ![alt text](https://imgur.com/VQOiYHs.png "Manage products")
 
-### Add new product
+#### Add new product
 ![alt text](https://imgur.com/t3raRHl.png "Add new product")
 
 ![alt text](https://imgur.com/mdZECZF.png "Add new product")
