@@ -30,7 +30,7 @@ export const fetchProducts = () => {
                 dispatch(fetchProductsSuccess(res.data))
             })
             .catch((err) => {
-                dispatch(fetchProductsFailure(err.response))
+                dispatch(fetchProductsFailure(err))
             })
     }
 }

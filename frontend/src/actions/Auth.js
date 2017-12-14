@@ -91,6 +91,11 @@ export const userSignupRequest = (userInfo) => {
             .then((res) => {
                 toastr.success("Welcome! Your account is available now.")
             })
+            .catch((err) => {
+                if (err.response.status === 400 && err.response.data.username[0] === 'A user with that username already exists.') {
+                    toastr.error("A user with that username already exists.")
+                }
+            })
     }
 }
 

@@ -34,7 +34,7 @@ export const fetchOrders = () => {
                 dispatch(fetchOrdersSuccess(res.data))
             })
             .catch((err) => {
-                dispatch(fetchOrdersFailure(err.response))
+                dispatch(fetchOrdersFailure(err))
             })
     }
 }
@@ -46,7 +46,7 @@ export const updateProduct = (productId, productData) => {
                 toastr.success(`Product ${productData.name} updated successfully.`)
             })
             .catch((err) => {
-                toastr.error(err.response)
+                toastr.error(err)
             })
     }
 }
@@ -59,7 +59,7 @@ export const addNewProduct = (productData) => {
                 dispatch(fetchProducts())
             })
             .catch((err) => {
-                toastr.error(err.response)
+                toastr.error(err)
             })
     }
 }
@@ -72,7 +72,7 @@ export const deleteProduct = (productId, productName) => {
                 dispatch(fetchProducts())
             })
             .catch((err) => {
-                toastr.error(err.response)
+                toastr.error(err)
             })
     }
 }

@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-import { LOGIN_SUCCESS } from '../constants/ActionTypes'
+import { LOGIN_SUCCESS, LOGIN_FAILURE } from '../constants/ActionTypes'
 
 const initialState = {
     isAuthenticated: false,
@@ -13,6 +13,12 @@ const auth = (state=initialState, action={}) => {
             return {
                 isAuthenticated: !_.isEmpty(action.payload),
                 user: action.payload
+            }
+
+        case LOGIN_FAILURE:
+            return {
+                ...initialState,
+                error: action.payload
             }
 
         default:

@@ -134,6 +134,7 @@ class Account extends React.Component {
                     label='Username or E-mail'
                     placeholder='Username or E-mail'
                     onChange={this.handleLoginOnChange}
+                    error={typeof this.props.auth.error !== 'undefined'}
                 />
 
                 <Form.Input
@@ -143,6 +144,7 @@ class Account extends React.Component {
                     label='Password'
                     placeholder='Password'
                     onChange={this.handleLoginOnChange}
+                    error={typeof this.props.auth.error !== 'undefined'}
                 />
 
                 <Segment padded>
