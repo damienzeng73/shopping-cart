@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Segment, Button, Divider, Modal, Message, Header, TextArea, Image } from 'semantic-ui-react'
+import { Form, Segment, Button, Divider, Modal, Message, Header, Image } from 'semantic-ui-react'
 import _ from 'lodash'
 
 import OrderList from './OrderList'
@@ -271,7 +271,7 @@ class Account extends React.Component {
                                     onChange={this.handleNewProductOnChange}
                                 />
 
-                                <TextArea
+                                <Form.TextArea
                                     name='description'
                                     value={this.state.newProduct.description}
                                     label='Description'
