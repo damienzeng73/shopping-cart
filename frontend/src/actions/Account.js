@@ -53,7 +53,7 @@ export const updateProduct = (productId, productData) => {
 
 export const addNewProduct = (productData) => {
     return dispatch => {
-        axios.post('/api/products/', {category: productData.category, name: productData.name, price: productData.price, quantity: productData.quantity, image_url: productData.imageUrl})
+        axios.post('/api/products/', {category: productData.category, name: productData.name, price: productData.price, quantity: productData.quantity, description: productData.description, image_url: productData.imageUrl})
             .then((res) => {
                 toastr.success(`Product ${productData.name} added successfully.`)
                 dispatch(fetchProducts())
