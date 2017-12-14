@@ -43,7 +43,7 @@ class Navbar extends React.Component {
 
     handleSearchItems(e) {
         let filteredProducts = _.filter(this.state.initialProducts, (obj) => {
-            return _.includes(obj.name, e.target.value)
+            return _.includes(obj.name.toLowerCase(), e.target.value.toLowerCase())
         })
 
         this.props.filterProducts(filteredProducts)
