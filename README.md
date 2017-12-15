@@ -14,14 +14,14 @@ Clone this repository:
 
 Create virtualenv and install all requirements in **backend** directory:
 
-    cd Shopping-cart/backend/
+    cd shopping-cart/backend/
     python3 -m venv venv_name
     source venv_name/bin/activate
     pip install -r requirements.txt
 
 Install all needed node_modules in **frontend** directory:
 
-    cd Shopping-cart/frontend/
+    cd shopping-cart/frontend/
     npm install
 
 or if you're using yarn:
@@ -36,7 +36,7 @@ Prepare database in postgreSQL:
     # Quit postgresql shell
     \q
 
-Set up database connection in **Shopping-cart/backend/backend/settings.py** in DATABASES section:
+Set up database connection in **shopping-cart/backend/backend/settings.py** in DATABASES section:
 
     DATABASES = {
         'default': {
@@ -51,13 +51,13 @@ Set up database connection in **Shopping-cart/backend/backend/settings.py** in D
 
 Fire up **backend** server:
 
-    cd Shopping-cart/backend/
+    cd shopping-cart/backend/
     python manage.py migrate
     python manage.py runserver
 
 Open another terminal for **frontend** server:
 
-    cd Shopping-cart/frontend/
+    cd shopping-cart/frontend/
     npm start
 
 or if you're using yarn:
