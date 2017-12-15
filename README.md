@@ -3,7 +3,7 @@ A smiple Shopping-cart built with ReactJS and Django REST Framework(DRF).
 
 ## Dependencies
 * Python3+
-* Node.js
+* Node
 * PostgreSQL
 
 ## Getting Started
