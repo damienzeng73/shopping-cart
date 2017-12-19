@@ -108,3 +108,6 @@ or if you're using yarn:
 * [django-rest-framework-jwt](http://getblimp.github.io/django-rest-framework-jwt/) - JSON Web Token Authentication support for Django REST framework
 * [axios](https://github.com/mzabriskie/axios) - A Promised based HTTP client
 * [toastr](https://github.com/CodeSeven/toastr) - Simple javascript toast notifications
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
