@@ -110,4 +110,4 @@ or if you're using yarn:
 * [toastr](https://github.com/CodeSeven/toastr) - Simple javascript toast notifications
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
