@@ -1,5 +1,5 @@
 # Shopping-cart
-A smiple Shopping-cart built with ReactJS and Django REST Framework(DRF).
+A simple Shopping-cart built with ReactJS and Django REST Framework(DRF).
 
 ## Dependencies
 * Python3+
@@ -10,7 +10,7 @@ A smiple Shopping-cart built with ReactJS and Django REST Framework(DRF).
 ### Installation
 Clone this repository:
 
-    git clone git@github.com:damnee562/shopping-cart.git
+    git clone https://github.com/damnee562/shopping-cart.git
 
 Create virtualenv and install all requirements in **backend** directory:
 
@@ -22,11 +22,11 @@ Create virtualenv and install all requirements in **backend** directory:
 Install all needed node_modules in **frontend** directory:
 
     cd shopping-cart/frontend/
-    npm install
-
-or if you're using yarn:
-
     yarn install
+
+or with npm:
+
+    npm install
 
 Prepare database in postgreSQL:
 
@@ -58,11 +58,11 @@ Fire up **backend** server:
 Open another terminal for **frontend** server:
 
     cd shopping-cart/frontend/
-    npm start
-
-or if you're using yarn:
-
     yarn start
+
+or with npm:
+
+    npm start
 
 ### Screenshots
 #### Shopping page
