@@ -1,5 +1,5 @@
 # Shopping-cart
-A simple Shopping-cart built with ReactJS and Django REST Framework(DRF).
+A simple Shopping-cart built with React and Django REST Framework(DRF).
 
 ## Dependencies
 * Python3+
@@ -101,7 +101,7 @@ or with npm:
 ![alt text](https://imgur.com/lg6Jx2M.png "New product")
 
 ## Built With
-* [ReactJS](https://facebook.github.io/react/) - A JavaScript library for building UI
+* [React](https://facebook.github.io/react/) - A JavaScript library for building UI
 * [Semantic UI React](https://react.semantic-ui.com/introduction) - A React UI framework
 * [Redux](https://redux.js.org/) - A predictable state container for JavaScript apps
 * [Django REST framework](http://www.django-rest-framework.org/) - A powerful and flexible toolkit for building Web APIs
