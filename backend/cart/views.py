@@ -13,12 +13,13 @@ from cart.permissions import IsStaffOrTargetUser
 import json
 import logging
 
+
 # Create your views here.
 class ProductsViewSet(viewsets.ModelViewSet):
     queryset = Products.objects.all().order_by('-name')
     serializer_class = ProductsSerializer
     permission_classes = (
-        permissions.IsAuthenticatedOrReadOnly,
+        permissions.IsAuthenticated,
         IsOwnerOrReadOnly
     )
 
@@ -30,7 +31,7 @@ class OrdersViewSet(viewsets.ModelViewSet):
     queryset = Orders.objects.all().order_by('-id')
     serializer_class = OrdersSerializer
     permission_classes = (
-        permissions.IsAuthenticatedOrReadOnly,
+        permissions.IsAuthenticated,
         IsOwnerOrReadOnly
     )
 
