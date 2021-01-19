@@ -1,0 +1,5 @@
+# PyCharm files
+.idea/
+
+# virtualenv
+backend-venv/

@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.21.1",
+    "fbjs": "^0.8.16",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
     "prop-types": "^15.6.0",
@@ -11,7 +12,7 @@
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.17",
+    "react-scripts": "^4.0.1",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "semantic-ui-react": "^0.76.0",
@@ -20,7 +21,7 @@
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "yarn run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
     "build-js": "react-scripts build",
     "start": "npm-run-all -p watch-css start-js",
@@ -32,5 +33,17 @@
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.2"
   },
-  "proxy": "http://localhost:8000"
+  "proxy": "http://localhost:8000",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

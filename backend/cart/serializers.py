@@ -3,12 +3,13 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from cart.models import Products, Orders
 
+
 class ProductsSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Products
-        fields = '__all__'
+        fields = ['id', 'category', 'name', 'price', 'quantity', 'rating', 'description', 'image_url', 'owner']
 
 
 class OrdersSerializer(serializers.ModelSerializer):
@@ -24,7 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password', 'products')
+        fields = ['id', 'username', 'email', 'password', 'products']
         extra_kwargs = {
             'password': {
                 'write_only': True

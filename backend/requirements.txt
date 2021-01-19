@@ -1,7 +1,8 @@
-Django==1.11.7
-djangorestframework==3.7.3
-djangorestframework-jwt==1.11.0
-pkg-resources==0.0.0
-psycopg2==2.7.3.2
-PyJWT==1.5.3
-pytz==2017.3
+asgiref==3.3.1
+Django==3.1.4
+djangorestframework==3.12.2
+djangorestframework-simplejwt==4.6.0
+psycopg2-binary==2.8.6
+PyJWT==1.7.1
+pytz==2020.5
+sqlparse==0.4.1
