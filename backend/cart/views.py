@@ -18,10 +18,7 @@ import logging
 class ProductsViewSet(viewsets.ModelViewSet):
     queryset = Products.objects.all().order_by('-name')
     serializer_class = ProductsSerializer
-    permission_classes = (
-        permissions.IsAuthenticated,
-        IsOwnerOrReadOnly
-    )
+    permission_classes = [IsOwnerOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
